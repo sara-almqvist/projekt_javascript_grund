@@ -1,0 +1,613 @@
+$bg-color1: lightblue;
+$bg-color2: rgb(16, 75, 95);
+$f-color1: black;
+$f-color2: white;
+$table-color: rgba(173, 216, 230, 0.5);
+$fontsize: 16px;
+$fontfamily-text: Tahoma, serif;
+$fontfamily-heading: Verdana, sans-serif;
+$transistion: 200ms ease-in-out;
+
+
+@mixin ord-text {
+    color: $f-color1;
+    font-size: $fontsize;
+    font-family: $fontfamily-text;
+    letter-spacing: 1px;
+}
+
+@mixin b1-b2 {
+    background-color: $bg-color1;
+    color: $bg-color2;
+}
+
+@mixin b1-c1 {
+    background-color: $bg-color1;
+    color: $f-color1;
+}
+
+@mixin b2-c2 {
+    background-color: $bg-color2;
+    color: $f-color2;
+}
+
+@mixin flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes shiftBg {
+    0% {background-image: url(img/header1280.jpeg);}
+    50% {background-image: url(img/altheader1280.jpeg);}
+    100% {background-image: url(img/header3_1280.jpeg);}
+}
+
+body {
+    background-color: $bg-color1;
+    background: linear-gradient(180deg,rgba(16, 75, 95, 1) 0%, rgba(173, 216, 230, 1) 100%);
+    min-width: 100%;
+}
+
+header.hero {
+    background-color: $bg-color1;
+    background-image: url(img/header1280.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: clamp(50vh, 70vh, 100vh);
+    min-width: 100%;
+    @include flex-col-center();
+    transition: all 500ms linear;
+    animation: none;
+    
+    h1 {
+        color: $bg-color2;
+        text-shadow: 1px 1px 2px black;
+        font-family: $fontfamily-heading;
+        background-color: rgba(255, 255, 255, 0.5);
+        width: fit-content;
+        padding: 5px;
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: calc($fontsize * 2);
+
+    }
+
+    button {
+        border: 4px solid $bg-color2;
+        box-shadow: 1px 1px 1px 2px rgb(1, 1, 1);
+        padding: 20px;
+        border-radius: 20px;
+        background-color: $bg-color1;
+        transition: all $transistion;
+
+      a {
+        text-decoration: none;
+        @include ord-text();
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: all $transistion;
+        text-shadow: 1px 1px 2px white;
+        }
+    } 
+}
+
+button.main:hover,
+button:hover,
+button:focus-visible {
+    background-color: $bg-color2;
+    border: 4px solid $bg-color1;
+
+    a {
+        color: $f-color2;
+        text-shadow: none;
+    }
+
+}
+
+
+.news {
+    @include ord-text();
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    align-items: baseline;
+    justify-content: flex-start;
+    scroll-snap-type: y mandatory;
+    text-align: left;
+    height: clamp(20vh, 30vh, 35vh);
+    
+
+    .newsitem {
+        padding: 15px;
+        margin: 10px;
+        border: 1px dotted $bg-color2;
+        flex: 1 1 auto;
+        scroll-snap-align: start;
+        transition: scale $transistion;
+        overflow: auto;
+        
+        h2 {
+            @include b2-c2();
+            padding: 10px;
+            margin: 5px;
+            font-size: calc($fontsize * 1.5);
+        }
+    }
+}
+
+.newsitem:focus-visible,
+.newsitem:hover {
+    border: 2px dotted $f-color2;
+    transform: scale(1.05);
+}
+
+main {
+    margin: 0 auto;
+}
+
+footer {
+    @include b2-c2();
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px 5px;
+    min-width: 100%;
+
+    button {
+        text-align: center;
+        @include ord-text();
+        @include b2-c2();
+        padding: 10px;
+        margin-bottom: 8px;
+        margin-right: 5px;
+        text-transform: uppercase;
+        
+        a {
+            text-decoration: none;
+            color: $f-color2;
+        }
+
+        i {
+            margin: 2px;
+        }
+    }
+
+    button:first-of-type:after {
+        content:"Hitta hit"
+    }
+
+    address {
+        display:none;
+    }
+
+}
+
+.smalltext {
+    font-style: italic;
+    font-size: calc($fontsize * 0.75);
+}
+
+.smalltext::before {
+    content:"Publicerades: "
+}
+
+table {
+    border: 1px solid $f-color2;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: auto;
+    margin: 10px auto;
+    font-family: $fontfamily-text;
+    letter-spacing: 1px;
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid $f-color2;
+    }
+    td {
+        text-align: right;
+    }
+
+    td:first-child {
+        text-align: left;
+    }
+
+   tbody {
+     tr:nth-child(even) {
+        @include b1-c1();
+    }
+    tr:nth-child(odd) {
+        background-color: rgba(173, 216, 230, 0.5)
+    }
+   }
+
+    thead {
+        @include b2-c2();
+        text-align: left;
+        }
+    
+
+    tfoot {
+        @include b1-b2();
+        font-weight: bold;
+    }
+}
+
+.lghtabell td:nth-child(2){
+   text-align: left;
+}
+
+.lghtabell tfoot tr td:nth-child(2){
+    text-align: right
+}
+
+p {
+    @include ord-text();
+}
+
+abbr {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: calc($fontsize * 3);
+}
+
+h2 {
+    font-size: calc($fontsize * 2);
+}
+
+.history {
+    @include flex-col-center();
+    flex-wrap: nowrap;
+
+
+    p {
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: center;
+    }
+
+    img {
+        border-radius: 5px;
+        padding-bottom: 15px;
+    }
+
+    blockquote {
+        @include ord-text();
+        width: 80%;
+    }
+    
+}
+
+.om {
+    display: grid;
+    grid-template: auto auto auto auto auto auto/ 1fr;
+    grid-template-areas: 
+    "r"
+    "img"
+    "c"
+    "tab1"
+    "tab2"
+    "tab3";
+    gap: 10px;
+    padding: 10px;
+
+    h2 {
+        grid-area: r;
+
+    }
+    p {
+        grid-area: c;
+        align-self: center;
+        letter-spacing: 1px;
+        @include ord-text();
+        padding: 15px;
+        background-color: $bg-color1;
+        border-radius: 10px;
+    }
+    img {
+        grid-area: img;
+        justify-self: center;
+        border-radius: 25%;
+        
+    }
+    table.lghtabell {
+        grid-area: tab1;
+        align-self: start;
+    }
+    table.overview {
+        grid-area: tab2;
+        align-self: start;
+    }
+    table.keyvalues {
+        grid-area: tab3;
+        align-self: start;
+    }
+
+    
+}
+
+.rubrik {
+    color: $f-color2;
+    text-shadow: 1px 1px 2px black;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+img.extra {
+    display: none;
+}
+
+section {
+    border: 1px solid $bg-color1;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: 15px;
+    
+    p {
+        color: $f-color2;
+        margin-left: 15px;
+    }
+
+    ul {
+        list-style-type: square;
+        color: $f-color2;
+        transition: all $transistion;
+
+        li a {
+            text-decoration: none;
+            @include ord-text();
+            transition: all $transistion;
+        }
+    }
+}
+
+li a:hover,
+li a:focus-visible,
+li label:hover,
+li label:hover {
+    color: $f-color2;
+    text-decoration: underline;
+}
+
+.contactform {
+    @include flex-col-center();
+    flex-wrap: wrap;
+    @include ord-text();
+
+    input,
+    textarea {
+        margin: 10px;
+    }
+
+
+    input[type=submit],
+    input[type=reset] {
+        @include ord-text();
+        @include b2-c2();
+        padding: $fontsize;
+        margin: 15px;
+        margin-top: 0;
+        transition: all $transistion;
+        border-radius: 5px;
+    }
+
+    input:hover,
+    input:focus-visible,
+    textarea:hover,
+    textarea:focus-visible {
+        border: 2px solid $bg-color2;
+    }
+
+    input[type=submit]:hover,
+    input[type=reset]:hover {
+        @include b1-c1();
+    }
+
+}
+
+img.pic1 {
+    grid-area: pic1;
+}
+
+img.pic2 {
+    grid-area: pic2;
+}
+
+img.pic3 {
+    grid-area: pic3;
+}
+
+img.pic4 {
+    grid-area: pic4;
+}
+
+h1 {
+    grid-area: r;
+}
+
+section.rules {
+    grid-area: rules;
+}
+
+section.formlink {
+    grid-area: form;
+}
+
+section.contactform {
+    grid-area: contact;
+}
+
+section.links {
+    grid-area: link;  
+}
+
+.wrapper {
+    display: grid;
+    grid-template: repeat(5, auto) / 1fr;
+    grid-template-areas: 
+    "r"
+    "rules"
+    "form"
+    "contact"
+    "link";
+
+    img {
+        display: none;
+        border-radius: 10px;
+        border: 2px solid $bg-color1;
+        transition: all $transistion;
+    }
+
+    img:hover {
+        transform: scale(1.5);
+    }
+
+}
+
+@media screen and (min-width: 700px) {
+    .news {
+        flex-wrap: nowrap;
+        scroll-snap-type: x mandatory;
+        margin-left: 15px;
+        margin-top: 15px;
+    }
+
+    .newsitem {
+        height: clamp(20vh, 25vh, 35vh);
+        min-width: 250px;
+        max-width: 500px;
+        
+    }
+
+    .om {
+        grid-template: auto auto auto auto/ 1fr 1fr;
+        grid-template-areas: 
+        "r r"
+        "tab1 img"
+        "tab1 c"
+        "tab2 tab3";
+
+        p{
+            align-self: start;
+        }
+        img {
+            align-self: center;
+        }
+    
+    
+
+    }
+
+    .wrapper {
+        grid-template: repeat(5, auto) / 1fr 1fr;
+        grid-template-areas: 
+        "r r"
+        "rules pic1"
+        "form pic2"
+        "contact pic3"
+        "link pic4";
+        align-items: center;
+        max-width: 100vw;
+        gap: 10px;
+        padding: 10px;
+
+        img {
+            display: block;
+            justify-self: center;
+        }
+
+        h1::after {
+            content:" och användbara länkar"
+        }
+    }
+
+    footer {
+        flex-direction: row-reverse;
+    }
+
+
+}
+
+
+
+
+@media screen and (min-width: 1250px) {
+    .newsitem {
+        height: clamp(20vh, 28vh, 35vh);
+    }
+
+    .om {
+        grid-template: auto auto auto auto/ 1fr 1fr 1fr;
+        grid-template-areas: 
+        "r r r"
+        "img img tab2"
+        "img img tab3"
+        "c c tab1"
+        "img2 img2 tab1"
+        ;
+        gap: 20px;
+
+        p {
+            align-self: start;
+        }
+
+    }
+    img.extra {
+        display: block;
+        border-radius: 25%;
+        grid-area: img2;
+    }
+
+    .wrapper {
+        grid-template: 1fr 3fr 3fr 4fr 3fr / 2fr 1fr;
+        grid-template-areas: 
+        "r r"
+        "rules pic1"
+        "form pic2"
+        "contact pic3"
+        "link pic4";
+        align-items: start;
+
+        img {
+            display: block;
+            justify-self: center;
+        }
+
+        img.pic3 {
+            align-self: center;
+        }
+
+        section {
+            text-align: center;
+
+            ul {
+                list-style-type: none;
+            }
+        }
+    }
+
+    header.hero {
+        animation: shiftBg 12s ease-in-out 1s infinite alternate;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    header.hero {
+        animation: none;
+    }
+
+    img.wrapper:hover {
+        transform: none;
+        border: 5px solid $bg-color1;
+    }
+}

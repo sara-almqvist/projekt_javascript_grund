@@ -1,0 +1,521 @@
+@charset "UTF-8";
+@keyframes shiftBg {
+  0% {
+    background-image: url(img/header1280.jpeg);
+  }
+  50% {
+    background-image: url(img/altheader1280.jpeg);
+  }
+  100% {
+    background-image: url(img/header3_1280.jpeg);
+  }
+}
+body {
+  background-color: lightblue;
+  background: linear-gradient(180deg, rgb(16, 75, 95) 0%, rgb(173, 216, 230) 100%);
+  min-width: 100%;
+}
+
+header.hero {
+  background-color: lightblue;
+  background-image: url(img/header1280.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70vh;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 500ms linear;
+  animation: none;
+}
+header.hero h1 {
+  color: rgb(16, 75, 95);
+  text-shadow: 1px 1px 2px black;
+  font-family: Verdana, sans-serif;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 32px;
+}
+header.hero button {
+  border: 4px solid rgb(16, 75, 95);
+  box-shadow: 1px 1px 1px 2px rgb(1, 1, 1);
+  padding: 20px;
+  border-radius: 20px;
+  background-color: lightblue;
+  transition: all 200ms ease-in-out;
+}
+header.hero button a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 200ms ease-in-out;
+  text-shadow: 1px 1px 2px white;
+}
+
+button.main:hover,
+button:hover,
+button:focus-visible {
+  background-color: rgb(16, 75, 95);
+  border: 4px solid lightblue;
+}
+button.main:hover a,
+button:hover a,
+button:focus-visible a {
+  color: white;
+  text-shadow: none;
+}
+
+.news {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  align-items: baseline;
+  justify-content: flex-start;
+  scroll-snap-type: y mandatory;
+  text-align: left;
+  height: 30vh;
+}
+.news .newsitem {
+  padding: 15px;
+  margin: 10px;
+  border: 1px dotted rgb(16, 75, 95);
+  flex: 1 1 auto;
+  scroll-snap-align: start;
+  transition: scale 200ms ease-in-out;
+  overflow: auto;
+}
+.news .newsitem h2 {
+  background-color: rgb(16, 75, 95);
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  font-size: 24px;
+}
+
+.newsitem:focus-visible,
+.newsitem:hover {
+  border: 2px dotted white;
+  transform: scale(1.05);
+}
+
+main {
+  margin: 0 auto;
+}
+
+footer {
+  background-color: rgb(16, 75, 95);
+  color: white;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px 5px;
+  min-width: 100%;
+}
+footer button {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  background-color: rgb(16, 75, 95);
+  color: white;
+  padding: 10px;
+  margin-bottom: 8px;
+  margin-right: 5px;
+  text-transform: uppercase;
+}
+footer button a {
+  text-decoration: none;
+  color: white;
+}
+footer button i {
+  margin: 2px;
+}
+footer button:first-of-type:after {
+  content: "Hitta hit";
+}
+footer address {
+  display: none;
+}
+
+.smalltext {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.smalltext::before {
+  content: "Publicerades: ";
+}
+
+table {
+  border: 1px solid white;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: auto;
+  margin: 10px auto;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+}
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid white;
+}
+table td {
+  text-align: right;
+}
+table td:first-child {
+  text-align: left;
+}
+table tbody tr:nth-child(even) {
+  background-color: lightblue;
+  color: black;
+}
+table tbody tr:nth-child(odd) {
+  background-color: rgba(173, 216, 230, 0.5);
+}
+table thead {
+  background-color: rgb(16, 75, 95);
+  color: white;
+  text-align: left;
+}
+table tfoot {
+  background-color: lightblue;
+  color: rgb(16, 75, 95);
+  font-weight: bold;
+}
+
+.lghtabell td:nth-child(2) {
+  text-align: left;
+}
+
+.lghtabell tfoot tr td:nth-child(2) {
+  text-align: right;
+}
+
+p {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+}
+
+abbr {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.history p {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+.history img {
+  border-radius: 5px;
+  padding-bottom: 15px;
+}
+.history blockquote {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  width: 80%;
+}
+
+.om {
+  display: grid;
+  grid-template: auto auto auto auto auto auto/1fr;
+  grid-template-areas: "r" "img" "c" "tab1" "tab2" "tab3";
+  gap: 10px;
+  padding: 10px;
+}
+.om h2 {
+  grid-area: r;
+}
+.om p {
+  grid-area: c;
+  align-self: center;
+  letter-spacing: 1px;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  padding: 15px;
+  background-color: lightblue;
+  border-radius: 10px;
+}
+.om img {
+  grid-area: img;
+  justify-self: center;
+  border-radius: 25%;
+}
+.om table.lghtabell {
+  grid-area: tab1;
+  align-self: start;
+}
+.om table.overview {
+  grid-area: tab2;
+  align-self: start;
+}
+.om table.keyvalues {
+  grid-area: tab3;
+  align-self: start;
+}
+
+.rubrik {
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+img.extra {
+  display: none;
+}
+
+section {
+  border: 1px solid lightblue;
+  border-radius: 10px;
+  margin: 10px;
+  margin-left: 15px;
+}
+section p {
+  color: white;
+  margin-left: 15px;
+}
+section ul {
+  list-style-type: square;
+  color: white;
+  transition: all 200ms ease-in-out;
+}
+section ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  transition: all 200ms ease-in-out;
+}
+
+li a:hover,
+li a:focus-visible,
+li label:hover,
+li label:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.contactform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+}
+.contactform input,
+.contactform textarea {
+  margin: 10px;
+}
+.contactform input[type=submit],
+.contactform input[type=reset] {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  background-color: rgb(16, 75, 95);
+  color: white;
+  padding: 16px;
+  margin: 15px;
+  margin-top: 0;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+}
+.contactform input:hover,
+.contactform input:focus-visible,
+.contactform textarea:hover,
+.contactform textarea:focus-visible {
+  border: 2px solid rgb(16, 75, 95);
+}
+.contactform input[type=submit]:hover,
+.contactform input[type=reset]:hover {
+  background-color: lightblue;
+  color: black;
+}
+
+img.pic1 {
+  grid-area: pic1;
+}
+
+img.pic2 {
+  grid-area: pic2;
+}
+
+img.pic3 {
+  grid-area: pic3;
+}
+
+img.pic4 {
+  grid-area: pic4;
+}
+
+h1 {
+  grid-area: r;
+}
+
+section.rules {
+  grid-area: rules;
+}
+
+section.formlink {
+  grid-area: form;
+}
+
+section.contactform {
+  grid-area: contact;
+}
+
+section.links {
+  grid-area: link;
+}
+
+.wrapper {
+  display: grid;
+  grid-template: repeat(5, auto)/1fr;
+  grid-template-areas: "r" "rules" "form" "contact" "link";
+}
+.wrapper img {
+  display: none;
+  border-radius: 10px;
+  border: 2px solid lightblue;
+  transition: all 200ms ease-in-out;
+}
+.wrapper img:hover {
+  transform: scale(1.5);
+}
+
+@media screen and (min-width: 700px) {
+  .news {
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+  .newsitem {
+    height: 25vh;
+    min-width: 250px;
+    max-width: 500px;
+  }
+  .om {
+    grid-template: auto auto auto auto/1fr 1fr;
+    grid-template-areas: "r r" "tab1 img" "tab1 c" "tab2 tab3";
+  }
+  .om p {
+    align-self: start;
+  }
+  .om img {
+    align-self: center;
+  }
+  .wrapper {
+    grid-template: repeat(5, auto)/1fr 1fr;
+    grid-template-areas: "r r" "rules pic1" "form pic2" "contact pic3" "link pic4";
+    align-items: center;
+    max-width: 100vw;
+    gap: 10px;
+    padding: 10px;
+  }
+  .wrapper img {
+    display: block;
+    justify-self: center;
+  }
+  .wrapper h1::after {
+    content: " och användbara länkar";
+  }
+  footer {
+    flex-direction: row-reverse;
+  }
+}
+@media screen and (min-width: 1250px) {
+  .newsitem {
+    height: 28vh;
+  }
+  .om {
+    grid-template: auto auto auto auto/1fr 1fr 1fr;
+    grid-template-areas: "r r r" "img img tab2" "img img tab3" "c c tab1" "img2 img2 tab1";
+    gap: 20px;
+  }
+  .om p {
+    align-self: start;
+  }
+  img.extra {
+    display: block;
+    border-radius: 25%;
+    grid-area: img2;
+  }
+  .wrapper {
+    grid-template: 1fr 3fr 3fr 4fr 3fr/2fr 1fr;
+    grid-template-areas: "r r" "rules pic1" "form pic2" "contact pic3" "link pic4";
+    align-items: start;
+  }
+  .wrapper img {
+    display: block;
+    justify-self: center;
+  }
+  .wrapper img.pic3 {
+    align-self: center;
+  }
+  .wrapper section {
+    text-align: center;
+  }
+  .wrapper section ul {
+    list-style-type: none;
+  }
+  header.hero {
+    animation: shiftBg 12s ease-in-out 1s infinite alternate;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  header.hero {
+    animation: none;
+  }
+  img.wrapper:hover {
+    transform: none;
+    border: 5px solid lightblue;
+  }
+}/*# sourceMappingURL=styles.css.map */

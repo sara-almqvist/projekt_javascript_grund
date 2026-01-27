@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="sv">
+    <head>
+        <title>Kontakt Brf Södra Lugnet</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta author="Sara Almqvist"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="menustyles.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+         <header class="second"> 
+            <label class="hamburger-menu">
+                <input type="checkbox"/>
+            </label>
+            <nav class="dropdowncontent">
+                <ul>
+                  <li> <a href="index.html" target="_self">Startsida</a></li>
+                  <li> <a href="about.html" target="_self">Om oss</a></li>
+                  <li> <a href="contact.html" target="_self">Formulär och kontakt</a></li>
+              </ul>
+            </nav>
+        </header>
+        <main class="wrapper">
+            <h1 class="rubrik">Formulär</h1>
+            <section class="rules">
+                <h2 class="rubrik">Stadgar och trivselregler</h2>
+                <p>Här finns länkar till våra stadgar och trivselregler</p>
+                <ul>
+                    <li><a href="content/stadgar.pdf" target="_blank">Stadgar</a></li>
+                    <li><a href="content/trivselreglertvattstuga.pdf" href="/Users/saraalmqvist/Documents/projektarbete/content/trivselreglertvattstuga" target="_blank">Trivselregler tvättstuga</a></li>
+                    <li><a href="content/welcome.pdf" href="/Users/saraalmqvist/Documents/projektarbete/content/welcome" target="_blank">Välkomstbrev till nya medlemmar</a> </li>
+                </ul>
+            </section>
+
+            <section class="formlink">
+                <h2 class="rubrik">Formulär</h2>
+                <ul>
+                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pagawao9mNQHFaMHE/form" target="_blank">Felanmälan</a> </li>
+                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pag0CXkHhIdN4I9pF/form" target="_blank"> Lämna motion till föreningsstämman</a></li>
+                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pagPPInhIC8xGmgHn/form" target="_blank"> Intresseanmälan hyra förråd eller carport</a></li>
+                </ul> 
+            </section>
+
+            <section class="contactform">
+                <h2 class="rubrik" id="kontakt">Kontakta styrelsen</h2>
+                <form action="mailto:brfsodralugnet@gmail.com" method="post" enctype="text/plain">
+                    <label for="contactname">Ditt namn:</label><br>
+                    <input type="text" id="contactname" name="contactname" size="30" required minlength="2"><br>
+                    <label for="email">Din e-postadress:</label><br>
+                    <input type="email" id="email" name="email" size="30"><br>
+                    <label for="message">Meddelande till styrelsen:</label><br>
+                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" cols="30" rows="5" required></textarea><br>
+                    <input type="submit">
+                    <input type="reset">
+                </form>
+            </section>
+
+            <section class="links">
+                <h2 class="rubrik">Användbara länkar</h2>
+                <ul>
+                    <li> <a href="https://www.bostadsratterna.se/" target="_blank">Bostadsrätterna</a> </li>
+                    <li> <a href="https://www.skatteverket.se/privat/fastigheterochbostad.4.18e1b10334ebe8bc80003922.html" target="_blank">Skatteverket</a> </li>
+                    <li> <a href="https://www.msb.se/" target="_blank"><abbr title="Myndigheten för samhällsskydd och beredskap">MSB</abbr></a> </li>
+                    <li> <a href="https://ssam.se/atervinning/sorteringsguide.html#/" target="_blank">SSAM:s sorteringsguide</a> </li>
+                    <li> <a href="https://bolagsverket.se/forening/bostadsrattsforening/lagarforbostadsrattsforening.1477.html" target="_blank">Bolagsverket</a> </li>
+                </ul>
+            </section>
+
+            <!--Extra bilder till större skärmar-->
+            <img class="pic1" 
+                srcset="img/southside27liten.jpeg 320w, img/southside27.jpeg 640w"
+                sizes="(width <= 1800px) 320px, 640px"
+                src="img/southside27.jpeg" alt="gul tvåvåningsbyggnad med träbalkonger omgiven av trädgård" title="Hus 27"/>
+
+            <img class="pic2" 
+                srcset="img/litenhus29.jpeg 320w, img/mellanhus29.jpeg 640w"
+                sizes="(width <= 1800px) 320px, 640px"
+                src="img/mellanhus29.jpeg" alt="Turkos tvåvåningsbyggnad med vita träbalkonger" title="Hus 29"/>
+
+            <img class="pic3" 
+                srcset="img/gardenliten.jpeg 320w, img/garden.jpeg 640w"
+                sizes="(width <= 1800px) 320px, 640px"
+                src="img/garden.jpeg" alt="Hund i trädgård omgiven av häck och husgavel." title="Föreningens trädgård"/>
+
+            <img class="pic4" 
+                srcset="img/miljohusliten.jpeg 320w, img/miljohusmellan.jpeg 640w"
+                sizes="(width <= 1800px) 320px, 640px"
+                src="img/miljohusmellan.jpeg" alt="Vitt miljöhus med två metalldörrar" title="Föreningens miljöhus"/>
+            <!-- <img class="pic1" 
+                src="img/southside27liten.jpeg" src="file:///Users/saraalmqvist/Documents/projektarbete/img/southside27liten.jpeg" alt="gul tvåvåningsbyggnad med träbalkonger omgiven av trädgård" title="Hus 27"/>
+
+            <img class="pic2" 
+                src="img/litenhus29.jpeg" src="https://github.com/sara-almqvist/projektarbete/blob/main/img/litenhus29.jpeg" alt="Turkos tvåvåningsbyggnad med vita träbalkonger" title="Hus 29"/>
+
+            <img class="pic3" 
+                src="img/gardenliten.jpeg" src="https://github.com/sara-almqvist/projektarbete/blob/main/img/gardenliten.jpeg" alt="Hund i trädgård omgiven av häck och husgavel." title="Föreningens trädgård"/>
+
+            <img class="pic4" 
+                src="img/miljohusliten.jpeg" src="https://github.com/sara-almqvist/projektarbete/blob/main/img/miljohusliten.jpeg" alt="Vitt miljöhus med två metalldörrar" title="Föreningens miljöhus"/> -->
+        </main>
+
+        <footer>
+            <button class="foot"><a href="https://maps.app.goo.gl/AmnyttMUHFXaQsLS6" target="_blank"><sub><i class="material-icons">&#xe88a</i></sub></a></button>
+            <button class="foot"><a href="https://bolagsverket.se/forening/bostadsrattsforening/lagarforbostadsrattsforening.1477.html" target="_blank"><sub><i class="material-icons">&#xe8a6</i></sub><abb title="Organisationsnummer"> Org.nr</abb><wbr> 769623-<wbr>6145</a></button>
+            <button class="foot"><i class="material-icons">email</i><a href="mailto:brfsodralugnet@gmail.com"><sup>Mejla oss</sup></a></button>
+            <address>Adress:<br>Lugnets väg 27 och 29<br>352 63 Växjö</address>
+        </footer>
+    </body>
+</html>
