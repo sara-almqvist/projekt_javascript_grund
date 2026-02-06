@@ -88,6 +88,7 @@ button:focus-visible a {
   scroll-snap-type: y mandatory;
   text-align: left;
   height: 30vh;
+  border: none;
 }
 .news .newsitem {
   padding: 15px;
@@ -105,6 +106,9 @@ button:focus-visible a {
   margin: 5px;
   font-size: 24px;
 }
+.news .newsitem p {
+  color: black;
+}
 
 .newsitem:focus-visible,
 .newsitem:hover {
@@ -116,6 +120,22 @@ main {
   margin: 0 auto;
 }
 
+button {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  background-color: rgb(16, 75, 95);
+  color: white;
+  padding: 15px 10px;
+  margin-left: 50px;
+  margin-top: 20px;
+  border: 4px solid rgb(16, 75, 95);
+  border-radius: 20px;
+  transition: all 200ms ease-in-out;
+}
+
 footer {
   background-color: rgb(16, 75, 95);
   color: white;
@@ -125,6 +145,14 @@ footer {
   justify-content: space-evenly;
   padding: 10px 5px;
   min-width: 100%;
+}
+footer p {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  background-color: rgb(16, 75, 95);
+  color: white;
 }
 footer button {
   text-align: center;

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="sv">
     <head>
-        <title>Brf Södra Lugnet</title>
+        <title>Extrasida för Brf Södra Lugnet</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta author="Sara Almqvist"/>
@@ -11,30 +11,26 @@
         <script defer src="main.js"></script>
     </head>
     <body>
-        <label class="hamburger-menu">
-            <input type="checkbox"/>
-        </label>
-        <nav class="dropdowncontent">
-            <ul>
-                <li> <a href="index.html" target="_self">Startsida</a></li>
-                <li> <a href="about.html" target="_self">Om oss</a></li>
-                <li> <a href="contact.html" target="_self">Formulär och kontakt</a></li>
-                <li> <a href="extra.html" target="_self">Extramaterial</a></li>
-            </ul>
-        </nav>
-        
-        <header class="hero">
-            <h1>Välkommen till <br>Brf Södra Lugnet!</h1>
-            <button class="main"><a href="about.html" target="_self">Läs mer</a></button>
+         <header class="second">
+            <label class="hamburger-menu">
+                <input type="checkbox"/>
+            </label>
+            <nav class="dropdowncontent">
+                <ul>
+                  <li> <a href="index.html" target="_self">Startsida</a></li>
+                  <li> <a href="about.html" target="_self">Om oss</a></li>
+                  <li> <a href="contact.html" target="_self">Formulär och kontakt</a></li>
+              </ul>
+            </nav>
         </header>
-
         <main>
-            <button id="showMoreNews">Visa fler nyheter</button>
-            <section class="news" id="newsContainer">
-            </section>
-        </main> 
-       
+            <h1 class="rubrik">Extramaterial</h1>
+            <button id="showNews">Klicka för att se nyheterna</button>
+            <div id="newsContainer" class="news">
 
+            </div>
+
+        </main>
         <footer class="footContainer" id="footContainer">
             <button class="foot"><a href="https://maps.app.goo.gl/AmnyttMUHFXaQsLS6" target="_blank"><sub><i class="material-icons">&#xe88a</i></sub></a></button>
             <button class="foot"><a href="https://bolagsverket.se/forening/bostadsrattsforening/lagarforbostadsrattsforening.1477.html" target="_blank"><sub><i class="material-icons">&#xe8a6</i></sub><abb title="Organisationsnummer"> Org.nr</abb><wbr> 769623-<wbr>6145</a></button>
@@ -42,6 +38,5 @@
             <address>Adress:<br>Lugnets väg 27 och 29<br>352 63 Växjö</address>
             <p id="showDateTime">XXXX-XX-XX kl.XX:XX</p>
         </footer>
-
     </body>
 </html>

@@ -117,6 +117,7 @@ button:focus-visible {
     scroll-snap-type: y mandatory;
     text-align: left;
     height: clamp(20vh, 30vh, 35vh);
+    border: none;
     
 
     .newsitem {
@@ -134,6 +135,10 @@ button:focus-visible {
             margin: 5px;
             font-size: calc($fontsize * 1.5);
         }
+
+        p {
+            color: $f-color1;
+        }
     }
 }
 
@@ -147,6 +152,18 @@ main {
     margin: 0 auto;
 }
 
+button {
+    text-align: center;
+    @include ord-text();
+    @include b2-c2();
+    padding: 15px 10px;
+    margin-left: 50px;
+    margin-top: 20px;
+    border: 4px solid $bg-color2;
+    border-radius: 20px;
+    transition: all $transistion;
+}    
+
 footer {
     @include b2-c2();
     display: flex;
@@ -155,6 +172,11 @@ footer {
     justify-content: space-evenly;
     padding: 10px 5px;
     min-width: 100%;
+
+    p {
+        @include ord-text();
+        @include b2-c2();
+    }
 
     button {
         text-align: center;
@@ -370,6 +392,7 @@ section {
         }
     }
 }
+
 
 li a:hover,
 li a:focus-visible,
