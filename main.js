@@ -71,6 +71,21 @@ function doToggleNewsCards(){
     default: break; 
     }};
 
+function updateDisplayedImage(img){
+    displayedImage.src = img.src;
+    displayedImage.alt = img.alt;
+    displayedImage.title = img.title;
+}
+
+function createImageGallery(){
+    for (bild of bildGalleriObjekt){
+     let img = document.createElement('img');
+     img.setAttribute('src', bild.filename);
+     img.setAttribute('alt', bild.alt);
+     img.setAttribute('title', bild.title);
+     thumbBar.appendChild(img);
+     img.addEventListener('click', ()=> updateDisplayedImage(img));
+}}
 //Visa datum och tid på alla sidor
 setInterval(displayDateAndTime(), 1000);
 
@@ -118,12 +133,15 @@ allH3.forEach((a) => {
 });
 
 //Bildgalleri
+const bildGalleriContainer = document.getElementById('bildGalleriContainer');
+const displayedImage = document.querySelector('.displayedImg');
+const thumbBar = document.querySelector('.thumb');
+const bildGalleriObjekt = [
+    {filename: 'img/fastighet29medel.jpeg', alt: 'Turkos tvåvåningsbyggnad med tegeltak', title: 'Hus 29'}, 
+    {filename: 'img/southside27.jpeg', alt: 'gul tvåvåningsbyggnad med träbalkonger omgiven av trädgård', title: 'Hus 27'}, 
+    {filename: 'img/mellanhus29.jpeg', alt: 'Turkos tvåvåningsbyggnad med vita träbalkonger', title: 'Hus 29'},
+    {filename: 'img/garden.jpeg', alt: 'Hund i trädgård omgiven av häck och husgavel.', title: 'Föreningens trädgård'},
+    {filename: 'img/miljohusmellan.jpeg', alt: 'Vitt miljöhus med två metalldörrar', title: 'Föreningens miljöhus'},
+    {filename: 'img/fastighet27.jpg', alt: 'Gul tvåvåningsbyggnad med tegeltak och trätrappa på vänster sida', title: 'Hus 27'}];
 
-
-
-
-
-
-
-
-
+if (thumbBar){thumbBar.addEventListener('load', createImageGallery())};

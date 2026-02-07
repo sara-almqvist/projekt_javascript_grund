@@ -331,11 +331,12 @@ h2 {
 
 .om {
     display: grid;
-    grid-template: auto auto auto auto auto auto/ 1fr;
+    grid-template: auto auto auto auto auto auto auto/ 1fr;
     grid-template-areas: 
     "r"
-    "img"
     "c"
+    "img"
+    "thumb"
     "tab1"
     "tab2"
     "tab3";
@@ -357,8 +358,6 @@ h2 {
         border-radius: 10px;
     }
     img {
-        grid-area: img;
-        justify-self: center;
         border-radius: 25%;
         
     }
@@ -406,6 +405,27 @@ h3:hover {
 
 img.extra {
     display: none;
+}
+
+#bildGalleriContainer {
+    grid-area: img;
+}
+
+.thumb {
+    display: flex;
+    gap: 2px;
+    cursor: pointer;
+    grid-area: thumb;
+
+    img {
+        display: block;
+        width: 100px;
+        flex: 1;
+    }
+}
+
+.thumb img:hover{
+    outline: 2px solid $f-color2;
 }
 
 section {
@@ -552,12 +572,14 @@ section.links {
     }
 
     .om {
-        grid-template: auto auto auto auto/ 1fr 1fr;
+        grid-template: auto auto auto auto auto auto/ 1fr 1fr;
         grid-template-areas: 
         "r r"
-        "tab1 img"
-        "tab1 c"
-        "tab2 tab3";
+        "c tab1"
+        "c tab2"
+        "c tab3"
+        "img img"
+        "thumb thumb";
 
         p{
             align-self: start;
@@ -609,13 +631,13 @@ section.links {
     }
 
     .om {
-        grid-template: auto auto auto auto/ 1fr 1fr 1fr;
+        grid-template: auto auto auto auto auto/ 1fr 1fr 1fr;
         grid-template-areas: 
         "r r r"
+        "c c tab1"
         "img img tab2"
         "img img tab3"
-        "c c tab1"
-        "img2 img2 tab1"
+        "thumb thumb thumb"
         ;
         gap: 20px;
 
