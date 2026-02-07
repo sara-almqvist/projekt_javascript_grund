@@ -313,6 +313,7 @@ h2 {
   grid-template-areas: "r" "img" "c" "tab1" "tab2" "tab3";
   gap: 10px;
   padding: 10px;
+  place-items: center;
 }
 .om h2 {
   grid-area: r;
@@ -347,6 +348,10 @@ h2 {
   align-self: start;
 }
 
+.doldTabell {
+  display: none;
+}
+
 .rubrik {
   color: white;
   text-shadow: 1px 1px 2px black;
@@ -355,6 +360,18 @@ h2 {
 h1,
 h2 {
   text-align: center;
+}
+
+h3 {
+  cursor: pointer;
+  border: 2px solid rgb(16, 75, 95);
+  padding: 10px;
+}
+
+h3:hover {
+  background-color: white;
+  color: rgb(16, 75, 95);
+  border-color: rgba(173, 216, 230, 0.5);
 }
 
 img.extra {

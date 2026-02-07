@@ -88,12 +88,36 @@ const newsList = [
 
 const threeNewsList = [newsList[0], newsList[1], newsList[2]];
 const startIndexPage = document.getElementById('hero');
-if (startIndexPage){startIndexPage.addEventListener('load', createMultipleNewsCards(threeNewsList))};
- //Visa tre nyheter direkt på Index-sidan
+if (startIndexPage){startIndexPage.addEventListener('load', createMultipleNewsCards(threeNewsList))};//Visa tre nyheter direkt på Index-sidan
 
 if (toggleNewsButton){toggleNewsButton.addEventListener('click', () => doToggleNewsCards())};
 
 //JavaScript för about.html
+const lghtabellContainer = document.getElementById('lghtabellContainer');
+const lghtabellLabel = document.getElementById('lghtabellLabel');
+const lghtabell = document.getElementById('lghtabell');
+const overviewTabellContainer = document.getElementById('overviewTabellContainer');
+const overviewTabellLabel = document.getElementById('overviewTabellLabel');
+const overviewTabell = document.getElementById('overview');
+const keyvaluesTabellContainer = document.getElementById('keyvaluesTabellContainer');
+const keyvaluesTabellLabel = document.getElementById('keyvaluesTabellLabel');
+const keyvaluesTabell = document.getElementById('keyvalues');
+
+if (lghtabellLabel){lghtabellLabel.addEventListener('click', () => {
+    lghtabell.classList.toggle('doldTabell');
+})}
+
+if (overviewTabellLabel){overviewTabellLabel.addEventListener('click', () => overviewTabell.classList.toggle('doldTabell'))};
+
+if (keyvaluesTabellLabel){keyvaluesTabellLabel.addEventListener('click', () => keyvaluesTabell.classList.toggle('doldTabell'))};
+
+//Lägga till tooltips på tabelletiketterna
+let allH3 = document.querySelectorAll('h3');
+allH3.forEach((a) => {
+    a.setAttribute('title', 'Klicka för att se tabellen');
+});
+
+//Bildgalleri
 
 
 

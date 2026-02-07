@@ -40,7 +40,8 @@
                 <!--extra bild till stora skärmar-->
                 <img class="extra" src="img/fastighet29medel.jpeg" src="https://github.com/sara-almqvist/projektarbete/blob/main/img/fastighet29medel.jpeg" alt="Turkos tvåvåningsbyggnad med tegeltak" title="Hus 29" />
 
-                <table class="lghtabell">
+                <div id="lghtabellContainer"><h3 class="rubrik" id="lghtabellLabel">Lägenhetstabell</h3>
+                <table class="lghtabell doldTabell" id="lghtabell">
                     <thead>
                         <tr>
                             <th>Lägenhet</th> <th>Typ</th> <th>Yta &#40m<sup>2</sup>&#41</th> <th>Andelstal &#40&#37&#41</th>
@@ -89,8 +90,10 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
 
-                <table class="overview">
+                <div id="overviewTabellContainer"> <h3 class="rubrik" id="overviewTabellLabel">Ekonomisk flerårsöversikt</h3>
+                <table class="overview doldTabell" id="overview">
                     <thead>
                         <tr>
                             <th>Flerårs<wbr>översikt &#40Tkr&#41</th>
@@ -131,8 +134,10 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
-                <table class="keyvalues">
+                <div id="keyvaluesTabellContainer"><h3 class="rubrik" id="keyvaluesTabellLabel">Nyckeltal</h3>
+                <table class="keyvalues doldTabell" id="keyvalues">
                     <thead>
                         <tr>
                             <th>Nyckeltal &#40kr&#41</th>
@@ -176,6 +181,7 @@
                             <td>70,4</td>
                         </tr>
                     </table>
+                </div>
                 </article>
                    
                 <article class="history">
