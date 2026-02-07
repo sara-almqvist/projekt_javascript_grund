@@ -13,7 +13,7 @@ function displayDateAndTime(){
     let timeString = year+"-"+month+"-"+day+" kl."+hours+":"+minuts;
     let showDateTime = document.getElementById('showDateTime');
     showDateTime.textContent = timeString;
-}
+};
 
 function createNewsCard(rubrik, text, datum){
     let artikel = document.createElement('article');
@@ -29,12 +29,12 @@ function createNewsCard(rubrik, text, datum){
     paragrafDatum.classList.add('smalltext');
     paragrafDatum.innerText = datum;
     artikel.appendChild(paragrafDatum); 
-}
+};
 
 function createMultipleNewsCards(array){
     for (arr of array){
         createNewsCard(arr.rubrik, arr.text, arr.datum);
-    }}
+    }};
 
 function getListWithMoreNews(){
     let moreNewsList = [];
@@ -44,7 +44,7 @@ function getListWithMoreNews(){
         }
     }
     return moreNewsList;
-}
+};
 
 function doToggleNewsCards(){
      switch (toggleNewsButton.checked)
@@ -69,7 +69,7 @@ function doToggleNewsCards(){
             toggleNewsLabel.innerText = 'Visa fler nyheter';
             break;
     default: break; 
-    }}
+    }};
 
 //Visa datum och tid på alla sidor
 setInterval(displayDateAndTime(), 1000);
@@ -87,10 +87,13 @@ const newsList = [
 //Tanken är att nyheterna hämtas från ett API/backend-del längre fram
 
 const threeNewsList = [newsList[0], newsList[1], newsList[2]];
-createMultipleNewsCards(threeNewsList); //Visa tre nyheter direkt
+const startIndexPage = document.getElementById('hero');
+if (startIndexPage){startIndexPage.addEventListener('load', createMultipleNewsCards(threeNewsList))};
+ //Visa tre nyheter direkt på Index-sidan
 
-toggleNewsButton.addEventListener('click', () => doToggleNewsCards());
+if (toggleNewsButton){toggleNewsButton.addEventListener('click', () => doToggleNewsCards())};
 
+//JavaScript för about.html
 
 
 
