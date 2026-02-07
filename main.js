@@ -31,9 +31,52 @@ function createNewsCard(rubrik, text, datum){
     artikel.appendChild(paragrafDatum); 
 }
 
+function createMultipleNewsCards(array){
+    for (arr of array){
+        createNewsCard(arr.rubrik, arr.text, arr.datum);
+    }}
+
+function getListWithMoreNews(){
+    let moreNewsList = [];
+    if (newsList.length > 3){
+        for (let i=3; i < newsList.length; i++){
+            moreNewsList.push(newsList[i]);
+        }
+    }
+    return moreNewsList;
+}
+
+function doToggleNewsCards(){
+     switch (toggleNewsButton.checked)
+    {case true : 
+        switch (document.getElementsByClassName('newsitem').length)
+           {case 3: createMultipleNewsCards(getListWithMoreNews())
+            toggleNewsLabel.innerText = 'Visar alla nyheter';
+            break;
+            case 0: createMultipleNewsCards(newsList);
+            toggleNewsLabel.innerText = 'Visar alla nyheter';
+            break;
+            default:
+            createMultipleNewsCards(threeNewsList);
+            toggleNewsLabel.innerText = "Default vid checked"
+            break;
+       }
+       break;
+    case false: while (newsContainer.firstChild){
+                   newsContainer.removeChild(newsContainer.firstChild);
+                }
+            createMultipleNewsCards(threeNewsList);
+            toggleNewsLabel.innerText = 'Visa fler nyheter';
+            break;
+    default: break; 
+    }}
+
+//Visa datum och tid på alla sidor
 setInterval(displayDateAndTime(), 1000);
 
-let buttonNews = document.getElementById('showNews');
+//JavaScript för index.html
+const toggleNewsButton = document.getElementById('toggleNews');
+const toggleNewsLabel = document.getElementById('checkboxLabel');
 const newsContainer = document.getElementById('newsContainer');
 const newsList = [
     {rubrik: 'Ändrat datum', text:'Ändringen kring införande av moms är uppskjuten till oktober 2026', datum: '2026-02-02'}, 
@@ -41,10 +84,13 @@ const newsList = [
     {rubrik: 'Släpvagnen', text: 'Släpvagnen kan lånas fritt av föreningens medlemmar. Tänk på att den ska besiktas senast 31:a maj.', datum: '2026-02-06'}, 
     {rubrik: 'Snöröjning', text: 'Även i år kommer Trädgårdstjänst stå för snöröjningen på gemensamma gatan. Vi hjälps åt att skotta entréer och ingång till källare.', datum: '2025-10-17'}, 
     {rubrik: 'Moms', text: 'Från och med april 2026 kommer det tillkomma moms på carporthyran enligt nytt beslut från Skatteverket.', datum: '2025-10-29'}];
+//Tanken är att nyheterna hämtas från ett API/backend-del längre fram
 
-for (item of newsList){
-    createNewsCard(item.rubrik, item.text, item.datum)
-};
+const threeNewsList = [newsList[0], newsList[1], newsList[2]];
+createMultipleNewsCards(threeNewsList); //Visa tre nyheter direkt
+
+toggleNewsButton.addEventListener('click', () => doToggleNewsCards());
+
 
 
 
