@@ -44,15 +44,18 @@
                 </ul> 
             </section>
 
-            <section class="contactform">
+            <section class="contactform" id="contactformContainer">
                 <h2 class="rubrik" id="kontakt">Kontakta styrelsen</h2>
-                <form action="mailto:brfsodralugnet@gmail.com" method="post" enctype="text/plain">
-                    <label for="contactname">Ditt namn:</label><br>
-                    <input type="text" id="contactname" name="contactname" size="30" required minlength="2"><br>
-                    <label for="email">Din e-postadress:</label><br>
-                    <input type="email" id="email" name="email" size="30"><br>
-                    <label for="message">Meddelande till styrelsen:</label><br>
-                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" cols="30" rows="5" required></textarea><br>
+                <form action="mailto:brfsodralugnet@gmail.com" method="post" enctype="text/plain" id="contactform">
+                    <label for="contactname" id="contactnameLabel" data-content="Ditt namn">Ditt namn:</label><br>
+                    <input type="text" id="contactname" name="contactname" size="30" required minlength="2" data-invalid="Du måste ange för- och efternamn" data-focus="Fyll i ditt för- och efternamn"><br>
+                    <p id="invalidName" class="doldTabell"></p>
+                    <label for="email" id="emailLabel" data-content="Din e-postadress">Din e-postadress:</label><br>
+                    <input type="email" id="email" name="email" size="30" data-invalid="Ange en giltig e-postadress" data-focus="Fyll i din e-postadress"><br>
+                    <p id="invalidEmail" class="doldTabell"></p>
+                    <label for="message" id="messageLabel" data-content="Meddelande till styrelsen">Meddelande till styrelsen:</label><br>
+                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" cols="30" rows="5" required data-invalid="Fyll i meddelandet" data-focus="Skriv ditt meddelande"></textarea><br>
+                    <p id="invalidMessage" class="doldTabell"></p>
                     <input type="submit">
                     <input type="reset">
                 </form>

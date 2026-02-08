@@ -86,6 +86,39 @@ function createImageGallery(){
      thumbBar.appendChild(img);
      img.addEventListener('click', ()=> updateDisplayedImage(img));
 }}
+
+function makeResponseSubmitForm(namn, parentID, ...fields){
+    let svarsmeddelande;
+    if (namn.value.trim()){svarsmeddelande = namn.value.trim() +", tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.";} else{
+        svarsmeddelande = "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan";}
+    let visaSvarElement = document.createElement('dialog');
+    visaSvarElement.textContent = svarsmeddelande;
+    let parentElement = document.getElementById(parentID);
+    parentElement.appendChild(visaSvarElement);
+    visaSvarElement.showModal();
+    visaSvarElement.addEventListener('click', () => visaSvarElement.close());
+    namn.value = "";
+    for (let field of fields){
+        field.value = "";
+    }
+}
+
+function validateUserInputLength(field, label, limit){
+    field.addEventListener('focus', () =>{
+        label.style.color = "white";
+        label.textContent = field.dataset.focus;
+})
+    field.addEventListener('blur', () =>{
+    if (field.value.length > limit){
+        label.style.color = "black";
+        label.textContent = label.dataset.content;
+    } else {
+        label.style.color = "red";
+        label.textContent = field.dataset.invalid;
+    }
+})}
+
+
 //Visa datum och tid på alla sidor
 setInterval(displayDateAndTime(), 1000);
 
@@ -145,3 +178,23 @@ const bildGalleriObjekt = [
     {filename: 'img/fastighet27.jpg', alt: 'Gul tvåvåningsbyggnad med tegeltak och trätrappa på vänster sida', title: 'Hus 27'}];
 
 if (thumbBar){thumbBar.addEventListener('load', createImageGallery())};
+
+//JavaScript för contact.html
+//Kontakta styrelsen-formulär
+const contactForm = document.getElementById('contactform');
+const contactName = document.getElementById('contactname');
+const userEmail = document.getElementById('email');
+const userMessage = document.getElementById('message');
+const contactNameLabel = document.getElementById('contactnameLabel');
+
+if (contactForm){contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    makeResponseSubmitForm(contactName, 'contactformContainer', userEmail, userMessage);
+})};
+
+if(contactName){validateUserInputLength(contactName, contactNameLabel, 3)};
+if(userEmail){validateUserInputLength(userEmail, document.getElementById('emailLabel'), 3)};
+if(userMessage){validateUserInputLength(userMessage, document.getElementById('messageLabel'), 10)};
+
+//Formulärsektionen
+
