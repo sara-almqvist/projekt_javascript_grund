@@ -35,13 +35,60 @@
                 </ul>
             </section>
 
-            <section class="formlink">
+            <section class="formlink" id="formlinkContainer">
                 <h2 class="rubrik">Formulär</h2>
-                <ul>
-                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pagawao9mNQHFaMHE/form" target="_blank">Felanmälan</a> </li>
-                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pag0CXkHhIdN4I9pF/form" target="_blank"> Lämna motion till föreningsstämman</a></li>
-                    <li> <a href="https://airtable.com/appll8Xt8s2Qr92xi/pagPPInhIC8xGmgHn/form" target="_blank"> Intresseanmälan hyra förråd eller carport</a></li>
-                </ul> 
+                <p>Klicka på respektive formulär</p>
+                <h4 id="formReportLabel" class="rubrik">Felanmälan</h4>
+                <dialog id="formReportModal" class="modalDialog">
+                    <h2 class="rubrik">Felanmälan</h2>
+                    <form id="formReport" class="contactform" >
+                        <label for formReportUsername id="formReportUsernameLabel" data-content="Namn">Namn </label>
+                        <input type="text" data-focus="Fyll i för- och efternamn" data-invalid="Du måste fylla i för- och efternamn" id="formReportUsername" size="30">
+                        <label for formReportLocation id="formReportUserInputLocation" data-="Var finns felet">Var finns felet </label>
+                        <input type="text" data-focus="Ange berörd lägenhet eller gemensamt utrymme" data-invalid="Du måste fylla i var felet finns" id="formReportLocation" size="30">
+                        <label for formReportMessage id="formReportUserInputMessage" data-content="Beskriv felet">Beskriv felet</label>
+                        <textarea data-focus="Beskriv felet/ärendet" data-invalid="Du måste beskriva felet med flera ord" cols="30" rows="5" id="formReportMessage" required></textarea>
+                        <input type="submit" id="formReportSubmitBtn">
+                        <button id="closeFormReportModal" type="button">Stäng dialogrutan</button>
+                    </form>
+                </dialog>
+
+                <h4 id="motionReportLabel" class="rubrik">Lämna motion till föreningsstämman</h4>
+                <dialog id="motionReportModal" class="modalDialog">
+                    <h2 class="rubrik">Lämna motion till föreningsstämman</h2>
+                    <form id="motionReportForm" class="contactform">
+                        <label for motionReportUsername id="motionReportUsernameLabel" data-content="Namn">Namn</label>
+                        <input id="motionReportUsername" type="text" data-focus="Fyll i ditt för- och efternamn" data-invalid="Du måste fylla i för- och efternamn" size="30">
+                        <label for motionReportMessage id="motionReportMessageLabel" data-content="Motion">Motion</label>
+                        <textarea id="motionReportMessage" data-focus="Beskriv din motion" data-invalid="Du måste fylla i din motion" cols="30" rows="5" required></textarea>
+                        <input type="submit" id="motionReportSubmitBtn">
+                        <button id="closeMotionReportModal" type="button">Avbryt</button>
+                    </form>
+                </dialog>
+
+                <h4 id="rentFormLabel" class="rubrik">Intresseanmälan för att hyra förråd eller carport</h4>
+                <dialog id="rentFormModal" class="modalDialog">
+                    <h2 class="rubrik">Intresseanmälan för att hyra förråd eller carport</h2>
+                    <form id="rentForm" class="contactform">
+                        <label for rentFormUsername id="rentFormUsernameLabel" data-content="Namn">Namn</label>
+                        <input id="rentFormUsername" type="text" data-focus="Fyll i ditt för- och efternamn" data-invalid="Du måste fylla i för- och efternamn" size="50">
+                        <label for rentFormUserEmail id="rentFormUserEmailLabel" data-content="E-postadress">E-postadress</label>
+                        <input id="rentFormUserEmail" type="email" data-focus="Fyll i din e-postadress" data-invalid="Du måste fylla i din e-postadress" size="50">
+                        <label for rentFormUserChoice id="rentFormUserChoiceLabel" data-content="Välj objekt som önskas hyra">Välj objekt som önskas hyra</label>
+                        <select id="rentFormUserChoice" name="hyresobjekt" required>
+                            <option value="">Välj hyresobjekt</option>
+                            <option value="mindre förråd">Mindre förråd (3-8 kvm)</option>
+                            <option value="större förråd">Större förråd (10-20 kvm)</option>
+                            <option value="carport">Carport</option>
+                            <option value="parkeringsplats">Parkeringsplats</option>
+                        </select>
+                        <p>Carport kostar 300 kr/månad plus moms. Förråden kostar mellan 277-825 kr/månad beroende på storlek</p>
+                        <input type="submit" id="rentFormSubmitBtn">
+                        <button id="closeRentFormModal" type="button">Avbryt</button>
+                    </form>
+                </dialog>
+
+
             </section>
 
             <section class="contactform" id="contactformContainer">

@@ -87,10 +87,10 @@ function createImageGallery(){
      img.addEventListener('click', ()=> updateDisplayedImage(img));
 }}
 
-function makeResponseSubmitForm(namn, parentID, ...fields){
+function makeResponseSubmitForm(namn, parentID, meddelande, ...fields){
     let svarsmeddelande;
-    if (namn.value.trim()){svarsmeddelande = namn.value.trim() +", tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.";} else{
-        svarsmeddelande = "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan";}
+    if (namn.value.trim()){svarsmeddelande = namn.value.trim() +" "+meddelande;} else{
+        svarsmeddelande = meddelande;}
     let visaSvarElement = document.createElement('dialog');
     visaSvarElement.textContent = svarsmeddelande;
     let parentElement = document.getElementById(parentID);
@@ -116,6 +116,21 @@ function validateUserInputLength(field, label, limit){
         label.style.color = "red";
         label.textContent = field.dataset.invalid;
     }
+})}
+
+function showModalOnClick(label, modal){
+    label.addEventListener('click', ()=> modal.showModal());
+}
+
+function closeModalOnClick(buttonID, modal){
+    document.getElementById(buttonID).addEventListener('click', ()=> modal.close());
+}
+
+function makeModalSubmitResponse(formId, usernameId, meddelande, modal){
+    document.getElementById(formId).addEventListener('submit', (e) => {
+        e.preventDefault();
+        makeResponseSubmitForm(document.getElementById(usernameId), "formlinkContainer", meddelande);
+        modal.close();
 })}
 
 
@@ -189,7 +204,7 @@ const contactNameLabel = document.getElementById('contactnameLabel');
 
 if (contactForm){contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    makeResponseSubmitForm(contactName, 'contactformContainer', userEmail, userMessage);
+    makeResponseSubmitForm(contactName, 'contactformContainer', "tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", userEmail, userMessage);
 })};
 
 if(contactName){validateUserInputLength(contactName, contactNameLabel, 3)};
@@ -197,4 +212,41 @@ if(userEmail){validateUserInputLength(userEmail, document.getElementById('emailL
 if(userMessage){validateUserInputLength(userMessage, document.getElementById('messageLabel'), 10)};
 
 //Formulärsektionen
+//Ingen mottagande backend som tar emot formulärdatan ännu
 
+//Felanmälan-formuläret
+const formReportLabel = document.getElementById('formReportLabel');
+const formReportModal = document.getElementById('formReportModal');
+
+if (formReportLabel){
+    showModalOnClick(formReportLabel, formReportModal);
+    makeModalSubmitResponse('formReport', 'formReportUsername', "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", formReportModal);
+    closeModalOnClick('closeFormReportModal', formReportModal);
+    validateUserInputLength(document.getElementById('formReportUsername'), document.getElementById('formReportUsernameLabel'), 3);
+    validateUserInputLength(document.getElementById('formReportLocation'), document.getElementById('formReportUserInputLocation'), 2);
+    validateUserInputLength(document.getElementById('formReportMessage'), document.getElementById('formReportUserInputMessage'), 10);
+};
+
+//Lämna motion-formuläret
+const motionReportLabel = document.getElementById('motionReportLabel');
+const motionReportModal = document.getElementById('motionReportModal');
+
+if (motionReportLabel){
+    showModalOnClick(motionReportLabel, motionReportModal);
+    closeModalOnClick('closeMotionReportModal', motionReportModal);
+    validateUserInputLength(document.getElementById('motionReportUsername'), document.getElementById('motionReportUsernameLabel'), 3);
+    validateUserInputLength(document.getElementById('motionReportMessage'), document.getElementById('motionReportMessageLabel'), 10);
+    makeModalSubmitResponse('motionReportForm', 'rentFormUsername', "Tack för att du lämnat in en motion. Motionen kommer nu beredas av styrelsen.", motionReportModal);
+};
+
+//Intresseanmälan hyresobjekt
+const rentFormLabel = document.getElementById('rentFormLabel');
+const rentFormModal = document.getElementById('rentFormModal');
+
+if (rentFormLabel){
+    showModalOnClick(rentFormLabel, rentFormModal);
+    closeModalOnClick('closeRentFormModal', rentFormModal);
+    validateUserInputLength(document.getElementById('rentFormUsername'), document.getElementById('rentFormUsernameLabel'), 3);
+    validateUserInputLength(document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserEmailLabel'), 3);
+    makeModalSubmitResponse('rentForm', 'rentFormUsername', "Tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal);
+};

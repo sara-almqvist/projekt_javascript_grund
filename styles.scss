@@ -395,12 +395,24 @@ h3 {
     cursor: pointer;
     border: 2px solid $bg-color2;
     padding: 10px;
+    transition: all $transistion;
 }
 
 h3:hover {
     background-color: $f-color2;
     color: $bg-color2;
     border-color: $table-color;
+}
+
+h4 {
+    cursor: pointer;
+    text-decoration: underline;
+    transition: all $transistion;
+}
+
+h4:hover {
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 img.extra {
@@ -467,7 +479,8 @@ li label:hover {
     @include ord-text();
 
     input,
-    textarea {
+    textarea,
+    select {
         margin: 10px;
     }
 
@@ -497,6 +510,14 @@ li label:hover {
 
 }
 
+.modalDialog {
+    background-color: $bg-color2;
+
+    form{
+        padding: 30px;
+    }
+}
+
 img.pic1 {
     grid-area: pic1;
 }
@@ -523,6 +544,7 @@ section.rules {
 
 section.formlink {
     grid-area: form;
+    text-align: center;
 }
 
 section.contactform {
@@ -538,9 +560,9 @@ section.links {
     grid-template: repeat(5, auto) / 1fr;
     grid-template-areas: 
     "r"
-    "rules"
-    "form"
     "contact"
+    "form"
+    "rules"
     "link";
 
     img {
@@ -555,6 +577,7 @@ section.links {
     }
 
 }
+
 
 @media screen and (min-width: 700px) {
     .news {
@@ -587,18 +610,15 @@ section.links {
         img {
             align-self: center;
         }
-    
-    
-
     }
 
     .wrapper {
         grid-template: repeat(5, auto) / 1fr 1fr;
         grid-template-areas: 
         "r r"
-        "rules pic1"
+        "contact pic1"
         "form pic2"
-        "contact pic3"
+        "rules pic3"
         "link pic4";
         align-items: center;
         max-width: 100vw;
@@ -621,8 +641,6 @@ section.links {
 
 
 }
-
-
 
 
 @media screen and (min-width: 1250px) {
@@ -656,9 +674,9 @@ section.links {
         grid-template: 1fr 3fr 3fr 4fr 3fr / 2fr 1fr;
         grid-template-areas: 
         "r r"
-        "rules pic1"
+        "contact pic1"
         "form pic2"
-        "contact pic3"
+        "rules pic3"
         "link pic4";
         align-items: start;
 

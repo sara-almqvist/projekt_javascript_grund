@@ -364,12 +364,24 @@ h3 {
   cursor: pointer;
   border: 2px solid rgb(16, 75, 95);
   padding: 10px;
+  transition: all 200ms ease-in-out;
 }
 
 h3:hover {
   background-color: white;
   color: rgb(16, 75, 95);
   border-color: rgba(173, 216, 230, 0.5);
+}
+
+h4 {
+  cursor: pointer;
+  text-decoration: underline;
+  transition: all 200ms ease-in-out;
+}
+
+h4:hover {
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 img.extra {
@@ -440,7 +452,8 @@ li label:hover {
   letter-spacing: 1px;
 }
 .contactform input,
-.contactform textarea {
+.contactform textarea,
+.contactform select {
   margin: 10px;
 }
 .contactform input[type=submit],
@@ -469,6 +482,13 @@ li label:hover {
   color: black;
 }
 
+.modalDialog {
+  background-color: rgb(16, 75, 95);
+}
+.modalDialog form {
+  padding: 30px;
+}
+
 img.pic1 {
   grid-area: pic1;
 }
@@ -495,6 +515,7 @@ section.rules {
 
 section.formlink {
   grid-area: form;
+  text-align: center;
 }
 
 section.contactform {
@@ -508,7 +529,7 @@ section.links {
 .wrapper {
   display: grid;
   grid-template: repeat(5, auto)/1fr;
-  grid-template-areas: "r" "rules" "form" "contact" "link";
+  grid-template-areas: "r" "contact" "form" "rules" "link";
 }
 .wrapper img {
   display: none;
@@ -544,7 +565,7 @@ section.links {
   }
   .wrapper {
     grid-template: repeat(5, auto)/1fr 1fr;
-    grid-template-areas: "r r" "rules pic1" "form pic2" "contact pic3" "link pic4";
+    grid-template-areas: "r r" "contact pic1" "form pic2" "rules pic3" "link pic4";
     align-items: center;
     max-width: 100vw;
     gap: 10px;
@@ -580,7 +601,7 @@ section.links {
   }
   .wrapper {
     grid-template: 1fr 3fr 3fr 4fr 3fr/2fr 1fr;
-    grid-template-areas: "r r" "rules pic1" "form pic2" "contact pic3" "link pic4";
+    grid-template-areas: "r r" "contact pic1" "form pic2" "rules pic3" "link pic4";
     align-items: start;
   }
   .wrapper img {
