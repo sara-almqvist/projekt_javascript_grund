@@ -291,6 +291,7 @@ table {
 
 p {
     @include ord-text();
+    margin-left: 15px;
 }
 
 abbr {
@@ -582,6 +583,43 @@ section.links {
         transform: scale(1.5);
     }
 
+}
+
+.preMade {
+    border: 2px solid $bg-color2;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px;
+
+    button {
+        border-radius: 2px;
+
+        .knappV, .knappX{
+            display:none;
+        }
+    }
+}
+
+.userList {
+    border: 2px solid $bg-color1;
+    padding: 10px;
+}
+
+.knappV, 
+.knappX {
+    font-weight: 800;
+    border-radius: 0;
+    @include ord-text();
+}
+
+.knappV {
+    color: green;
+    background-color: white;
+}
+
+.knappX {
+    color: red;
+    background-color: white;
 }
 
 

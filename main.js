@@ -136,6 +136,36 @@ function makeModalSubmitResponse(formId, usernameId, meddelande, modal, ...field
         modal.close();
 })}
 
+function doPreMadeChoicesFromList(array, parent){
+    for (let element of array){
+    let item = document.createElement('button');
+    item.textContent = element;
+    item.setAttribute('data-list', 'true')
+    parent.appendChild(item);
+    makeTwoButtonsOnButton(item);
+}
+}
+
+function moveElementOnClick(moveFrom, moveTo){
+    moveFrom.addEventListener('click', (event) => {
+   let moveItem = moveFrom.removeChild(event.target);
+   moveTo.appendChild(moveItem);
+})}
+
+function makeTwoButtonsOnButton(parentButton){
+    let knappV = document.createElement('button');
+    let knappX = document.createElement('button');
+    knappV.textContent = "V";
+    knappX.textContent = "X";
+    knappV.classList.add('knappV');
+    knappX.classList.add('knappX');
+    parentButton.appendChild(knappV);
+    parentButton.appendChild(knappX);
+}
+
+function getAllDisplayedTask (){
+    return document.querySelectorAll('.userList > button');
+}
 
 //Visa datum och tid på alla sidor
 setInterval(displayDateAndTime(), 1000);
@@ -253,3 +283,42 @@ if (rentFormLabel){
     validateUserInputLength(document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserEmailLabel'), 3);
     makeModalSubmitResponse('rentForm', 'rentFormUsername', "Tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal, document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserChoice'));
 };
+
+//Extrasida med ToDo-lista
+const extraSida = document.getElementById('loadExtraPage');
+const preMadeChoicesArray = ['Putsa fönster (källare, vind, trappuppgång)','Gör rent carports', 'Rensa ogräs - häckar', 'Rensa ogräs - runt hus 27', 'Rensa ogräs - runt hus 29'];
+const preMadeChoicesContainer = document.getElementById('preMadeChoicesContainer');
+const displayUserList = document.getElementById('displayUserList');
+const addButton = document.getElementById('displayUserChoiceInput');
+const userInputField = document.getElementById('userChoiceInputField');
+const userList = [];
+
+if (extraSida){
+    doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer); 
+    moveElementOnClick(preMadeChoicesContainer, displayUserList);
+    moveElementOnClick(displayUserList, preMadeChoicesContainer);
+
+};
+
+if (addButton) {addButton.addEventListener('click', () => {
+    if ((!userInputField.value) || (userInputField.value.length < 3)){
+        alert('Fyll i en uppgift för att kunna lägga till den')
+    } else{
+        let element = document.createElement('button');
+        element.textContent = userInputField.value;
+        element.setAttribute('data-list', 'false')
+        displayUserList.appendChild(element);
+        userInputField.value = "";
+        makeTwoButtonsOnButton(element);
+}})};
+
+extraSida.addEventListener('click', () => {
+    const allDisplayButtons = getAllDisplayedTask();
+    for (let button of allDisplayButtons){
+        console.log(button.innerText);
+    }
+});
+
+
+
+
