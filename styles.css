@@ -489,6 +489,16 @@ li label:hover {
   padding: 30px;
 }
 
+.modalResponse {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  background-color: rgb(16, 75, 95);
+  color: white;
+  padding: 30px;
+}
+
 img.pic1 {
   grid-area: pic1;
 }

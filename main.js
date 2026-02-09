@@ -93,6 +93,7 @@ function makeResponseSubmitForm(namn, parentID, meddelande, ...fields){
         svarsmeddelande = meddelande;}
     let visaSvarElement = document.createElement('dialog');
     visaSvarElement.textContent = svarsmeddelande;
+    visaSvarElement.classList.add('modalResponse');
     let parentElement = document.getElementById(parentID);
     parentElement.appendChild(visaSvarElement);
     visaSvarElement.showModal();
@@ -126,10 +127,12 @@ function closeModalOnClick(buttonID, modal){
     document.getElementById(buttonID).addEventListener('click', ()=> modal.close());
 }
 
-function makeModalSubmitResponse(formId, usernameId, meddelande, modal){
+function makeModalSubmitResponse(formId, usernameId, meddelande, modal, ...fields){
     document.getElementById(formId).addEventListener('submit', (e) => {
         e.preventDefault();
         makeResponseSubmitForm(document.getElementById(usernameId), "formlinkContainer", meddelande);
+        for (let field of fields){
+        field.value = "";}
         modal.close();
 })}
 
@@ -220,7 +223,7 @@ const formReportModal = document.getElementById('formReportModal');
 
 if (formReportLabel){
     showModalOnClick(formReportLabel, formReportModal);
-    makeModalSubmitResponse('formReport', 'formReportUsername', "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", formReportModal);
+    makeModalSubmitResponse('formReport', 'formReportUsername', "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", formReportModal, document.getElementById('formReportLocation'), document.getElementById('formReportMessage'));
     closeModalOnClick('closeFormReportModal', formReportModal);
     validateUserInputLength(document.getElementById('formReportUsername'), document.getElementById('formReportUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('formReportLocation'), document.getElementById('formReportUserInputLocation'), 2);
@@ -236,7 +239,7 @@ if (motionReportLabel){
     closeModalOnClick('closeMotionReportModal', motionReportModal);
     validateUserInputLength(document.getElementById('motionReportUsername'), document.getElementById('motionReportUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('motionReportMessage'), document.getElementById('motionReportMessageLabel'), 10);
-    makeModalSubmitResponse('motionReportForm', 'rentFormUsername', "Tack för att du lämnat in en motion. Motionen kommer nu beredas av styrelsen.", motionReportModal);
+    makeModalSubmitResponse('motionReportForm', 'motionReportUsername', "Tack för att du lämnat in en motion. Motionen kommer nu beredas av styrelsen.", motionReportModal, document.getElementById('motionReportMessage'));
 };
 
 //Intresseanmälan hyresobjekt
@@ -248,5 +251,5 @@ if (rentFormLabel){
     closeModalOnClick('closeRentFormModal', rentFormModal);
     validateUserInputLength(document.getElementById('rentFormUsername'), document.getElementById('rentFormUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserEmailLabel'), 3);
-    makeModalSubmitResponse('rentForm', 'rentFormUsername', "Tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal);
+    makeModalSubmitResponse('rentForm', 'rentFormUsername', "Tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal, document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserChoice'));
 };

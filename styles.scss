@@ -518,6 +518,12 @@ li label:hover {
     }
 }
 
+.modalResponse {
+    @include ord-text();
+    @include b2-c2();
+    padding: 30px;
+}
+
 img.pic1 {
     grid-area: pic1;
 }
