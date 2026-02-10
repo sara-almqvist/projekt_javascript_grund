@@ -262,7 +262,7 @@ function loadUserInfo(){
         }}
 }
 
-function addUserTaskToDisplay(){
+function addUserTaskToDisplayWithButton(){
     addButton.addEventListener('click', () => {
     if ((!userInputField.value) || (userInputField.value.length < 3)){
         alert('Fyll i en uppgift för att kunna lägga till den')} 
@@ -274,6 +274,22 @@ function addUserTaskToDisplay(){
         displayUserList.appendChild(element);
         userInputField.value = "";
         makeTwoButtonsOnButton(element);
+}})}
+
+function addUserTaskToDisplayWithEnter(){
+    userInputField.addEventListener('keydown', (event) => {
+       if (event.key === 'Enter') {
+        if ((!userInputField.value) || (userInputField.value.length < 3)){
+        alert('Fyll i en uppgift för att kunna lägga till den')} 
+        else{
+        let element = document.createElement('button');
+        element.textContent = userInputField.value;
+        saveUserInputList.push(userInputField.value);
+        element.setAttribute('data-list', 'false')
+        displayUserList.appendChild(element);
+        userInputField.value = "";
+        makeTwoButtonsOnButton(element);
+       }        
 }})}
 
 function resetTasks (containerclass){
@@ -428,20 +444,12 @@ const finishTasksList = []; //store finish tasks between sessions
 
 if (extraSida){
     loadUserInfo();
-    //doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
     moveTaskFromPremadeToDisplay();
     saveUserInfo();
 };
 
-if (addButton) {addUserTaskToDisplay()};
+if (addButton) {addUserTaskToDisplayWithButton()}
+
+if(userInputField) {addUserTaskToDisplayWithEnter()};
 
 if (resetBtn){resetBtn.addEventListener('click', () => resetButton())};
-
-
-
-
-
-
-
-
-
