@@ -58,7 +58,6 @@ function doToggleNewsCards(){
             break;
             default:
             createMultipleNewsCards(threeNewsList);
-            toggleNewsLabel.innerText = "Default vid checked"
             break;
        }
        break;
@@ -87,10 +86,11 @@ function createImageGallery(){
      img.addEventListener('click', ()=> updateDisplayedImage(img));
 }}
 
+//Funktion för att skapa svarsmeddelande och rensa formulär vid submit
 function makeResponseSubmitForm(namn, parentID, meddelande, ...fields){
     let svarsmeddelande;
-    if (namn.value.trim()){svarsmeddelande = namn.value.trim() +" "+meddelande;} else{
-        svarsmeddelande = meddelande;}
+    if (namn.value.trim()){svarsmeddelande = namn.value.trim() +", "+meddelande;} else{
+        svarsmeddelande = convertFirstChar(meddelande);}
     let visaSvarElement = document.createElement('dialog');
     visaSvarElement.textContent = svarsmeddelande;
     visaSvarElement.classList.add('modalResponse');
@@ -104,13 +104,20 @@ function makeResponseSubmitForm(namn, parentID, meddelande, ...fields){
     }
 }
 
+function convertFirstChar(meddelande){
+let litenBokstav = meddelande[0];
+let storBokstav = meddelande[0].toUpperCase();
+let nyttMeddelande = meddelande.replace(litenBokstav, storBokstav);
+return nyttMeddelande;
+}
+
 function validateUserInputLength(field, label, limit){
     field.addEventListener('focus', () =>{
         label.style.color = "white";
         label.textContent = field.dataset.focus;
 })
     field.addEventListener('blur', () =>{
-    if (field.value.length > limit){
+    if ((field.value.length > limit) || (field.value.length === 0)){
         label.style.color = "black";
         label.textContent = label.dataset.content;
     } else {
@@ -157,6 +164,8 @@ function makeTwoButtonsOnButton(parentButton){
     knappX.textContent = "X";
     knappV.classList.add('knappV');
     knappX.classList.add('knappX');
+    knappV.setAttribute('title', 'Klarmarkera uppgiften');
+    knappX.setAttribute('title', 'Ta bort uppgiften');
     knappV.addEventListener('click', (event) => {
         let parent = event.target.parentNode;
         let taskText = parent.innerText;
@@ -326,7 +335,7 @@ const newsList = [
     {rubrik: 'Moms', text: 'Från och med april 2026 kommer det tillkomma moms på carporthyran enligt nytt beslut från Skatteverket.', datum: '2025-10-29'}];
 //Tanken är att nyheterna hämtas från ett API/backend-del längre fram
 
-const threeNewsList = [newsList[0], newsList[1], newsList[2]];
+const threeNewsList = newsList.slice(0,3); //[newsList[0], newsList[1], newsList[2]]
 const startIndexPage = document.getElementById('hero');
 if (startIndexPage){startIndexPage.addEventListener('load', createMultipleNewsCards(threeNewsList))};//Visa tre nyheter direkt på Index-sidan
 
@@ -371,6 +380,11 @@ const bildGalleriObjekt = [
 
 if (thumbBar){thumbBar.addEventListener('load', createImageGallery())};
 
+if (bildGalleriContainer){
+    if (window.innerWidth < 700) {
+        document.querySelector('.displayedImg').src = "img/fastighet27liten.jpeg";}
+};
+
 //JavaScript för contact.html
 //Kontakta styrelsen-formulär
 const contactForm = document.getElementById('contactform');
@@ -379,10 +393,18 @@ const userEmail = document.getElementById('email');
 const userMessage = document.getElementById('message');
 const contactNameLabel = document.getElementById('contactnameLabel');
 
-if (contactForm){contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    makeResponseSubmitForm(contactName, 'contactformContainer', "tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", userEmail, userMessage);
-})};
+if (contactForm){
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        makeResponseSubmitForm(contactName, 'contactformContainer', "tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", userEmail, userMessage);
+    })
+    contactForm.addEventListener('reset', (e) => {
+        e.preventDefault();
+        contactName.value = "";
+        userEmail.value = "";
+        userMessage.value = "";
+    })
+};
 
 if(contactName){validateUserInputLength(contactName, contactNameLabel, 3)};
 if(userEmail){validateUserInputLength(userEmail, document.getElementById('emailLabel'), 3)};
@@ -397,7 +419,7 @@ const formReportModal = document.getElementById('formReportModal');
 
 if (formReportLabel){
     showModalOnClick(formReportLabel, formReportModal);
-    makeModalSubmitResponse('formReport', 'formReportUsername', "Tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", formReportModal, document.getElementById('formReportLocation'), document.getElementById('formReportMessage'));
+    makeModalSubmitResponse('formReport', 'formReportUsername', "tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", formReportModal, document.getElementById('formReportLocation'), document.getElementById('formReportMessage'));
     closeModalOnClick('closeFormReportModal', formReportModal);
     validateUserInputLength(document.getElementById('formReportUsername'), document.getElementById('formReportUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('formReportLocation'), document.getElementById('formReportUserInputLocation'), 2);
@@ -413,7 +435,7 @@ if (motionReportLabel){
     closeModalOnClick('closeMotionReportModal', motionReportModal);
     validateUserInputLength(document.getElementById('motionReportUsername'), document.getElementById('motionReportUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('motionReportMessage'), document.getElementById('motionReportMessageLabel'), 10);
-    makeModalSubmitResponse('motionReportForm', 'motionReportUsername', "Tack för att du lämnat in en motion. Motionen kommer nu beredas av styrelsen.", motionReportModal, document.getElementById('motionReportMessage'));
+    makeModalSubmitResponse('motionReportForm', 'motionReportUsername', "tack för att du lämnat in en motion. Motionen kommer nu beredas av styrelsen.", motionReportModal, document.getElementById('motionReportMessage'));
 };
 
 //Intresseanmälan hyresobjekt
@@ -425,7 +447,7 @@ if (rentFormLabel){
     closeModalOnClick('closeRentFormModal', rentFormModal);
     validateUserInputLength(document.getElementById('rentFormUsername'), document.getElementById('rentFormUsernameLabel'), 3);
     validateUserInputLength(document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserEmailLabel'), 3);
-    makeModalSubmitResponse('rentForm', 'rentFormUsername', "Tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal, document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserChoice'));
+    makeModalSubmitResponse('rentForm', 'rentFormUsername', "tack för visat intresse! Vi hör av oss när det finns ett ledigt objekt", rentFormModal, document.getElementById('rentFormUserEmail'), document.getElementById('rentFormUserChoice'));
 };
 
 //Extrasida med ToDo-lista
@@ -450,6 +472,20 @@ if (extraSida){
 
 if (addButton) {addUserTaskToDisplayWithButton()}
 
-if(userInputField) {addUserTaskToDisplayWithEnter()};
+if(userInputField) {
+    addUserTaskToDisplayWithEnter();
+    userInputField.addEventListener('input', () => {
+        if (userInputField.value.length < 3){
+            document.getElementById('inputInstructions').textContent= "Beskriv uppgiften med minst ett ord";
+            document.getElementById('inputInstructions').style.color = 'red';
+        } else {
+        document.getElementById('inputInstructions').textContent = 'Tryck Enter eller klicka på "Lägg till"';
+        document.getElementById('inputInstructions').style.color = 'black';
+    }});
+    userInputField.addEventListener('blur', () => {
+        document.getElementById('inputInstructions').textContent = "";
+    })
+};
 
 if (resetBtn){resetBtn.addEventListener('click', () => resetButton())};
+    
