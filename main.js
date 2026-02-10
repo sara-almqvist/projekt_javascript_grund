@@ -146,12 +146,6 @@ function doPreMadeChoicesFromList(array, parent){
 }
 }
 
-function moveElementOnClick(moveFrom, moveTo){
-    moveFrom.addEventListener('click', (event) => {
-   let moveItem = moveFrom.removeChild(event.target);
-   moveTo.appendChild(moveItem);
-})}
-
 function makeTwoButtonsOnButton(parentButton){
     let knappV = document.createElement('button');
     let knappX = document.createElement('button');
@@ -159,16 +153,64 @@ function makeTwoButtonsOnButton(parentButton){
     knappX.textContent = "X";
     knappV.classList.add('knappV');
     knappX.classList.add('knappX');
+    knappV.addEventListener('click', (event) => {
+        let parent = event.target.parentNode;
+        let moveItem = displayUserList.removeChild(parent);
+        displayDoneTask.appendChild(moveItem);
+    });
+    knappX.addEventListener('click', (event) => {
+        let parent = event.target.parentNode;
+        if (parent.dataset.list === 'true'){
+            let moveItem = displayUserList.removeChild(parent);
+            preMadeChoicesContainer.appendChild(moveItem);
+            let taskText = moveItem.innerText;
+            let rensadText = taskText.replace('VX', '').trim();
+            let index = savePreMadeList.findIndex((e) => e === rensadText);
+            if (!index === -1) {savePreMadeList.splice(index, 1)};
+            preMadeCopiedArray.push(rensadText);
+        } else {
+            displayUserList.removeChild(parent)}});
     parentButton.appendChild(knappV);
     parentButton.appendChild(knappX);
 }
 
-function getAllDisplayedTask (){
-    return document.querySelectorAll('.userList > button');
+function moveTaskFromPremadeToDisplay (){
+    preMadeChoicesContainer.addEventListener('click', (event) => {
+        let moveItem = preMadeChoicesContainer.removeChild(event.target);
+        displayUserList.appendChild(moveItem);
+        let taskText = event.target.innerText;
+        let rensadText =taskText.replace('VX', '').trim();
+        savePreMadeList.push(rensadText);
+        let index = preMadeCopiedArray.findIndex((e) => e === rensadText);
+        if (!index === -1) {preMadeCopiedArray.splice(index, 1)};
+        })
+    }
+
+function saveTasks(nyckel, array){
+    localStorage.setItem(nyckel, JSON.stringify(array));
 }
 
+function loadTasks(nyckel){
+    let variabel = localStorage.getItem(nyckel);
+    if (variabel !== null){
+        return JSON.parse(variabel);
+    }}
+
+function addUserTaskToDisplay(){
+    addButton.addEventListener('click', () => {
+    if ((!userInputField.value) || (userInputField.value.length < 3)){
+        alert('Fyll i en uppgift för att kunna lägga till den')} 
+        else{
+        let element = document.createElement('button');
+        element.textContent = userInputField.value;
+        element.setAttribute('data-list', 'false')
+        displayUserList.appendChild(element);
+        userInputField.value = "";
+        makeTwoButtonsOnButton(element);
+}})}
+
 //Visa datum och tid på alla sidor
-setInterval(displayDateAndTime(), 1000);
+setInterval(() => displayDateAndTime(), 1000);
 
 //JavaScript för index.html
 const toggleNewsButton = document.getElementById('toggleNews');
@@ -287,37 +329,27 @@ if (rentFormLabel){
 //Extrasida med ToDo-lista
 const extraSida = document.getElementById('loadExtraPage');
 const preMadeChoicesArray = ['Putsa fönster (källare, vind, trappuppgång)','Gör rent carports', 'Rensa ogräs - häckar', 'Rensa ogräs - runt hus 27', 'Rensa ogräs - runt hus 29'];
+const preMadeCopiedArray = preMadeChoicesArray.slice();//justera preMade vid Load
 const preMadeChoicesContainer = document.getElementById('preMadeChoicesContainer');
 const displayUserList = document.getElementById('displayUserList');
 const addButton = document.getElementById('displayUserChoiceInput');
 const userInputField = document.getElementById('userChoiceInputField');
 const userList = [];
+const savePreMadeList = []; //store elements from premade
+const saveUserInputList = []; //store elements from userinput
+const finishTasksList = []; //store finish tasks between sessions
+const displayDoneTask = document.getElementById('displayDoneTaskContainer');
 
 if (extraSida){
-    doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer); 
-    moveElementOnClick(preMadeChoicesContainer, displayUserList);
-    moveElementOnClick(displayUserList, preMadeChoicesContainer);
-
+    doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
+    moveTaskFromPremadeToDisplay();
 };
 
-if (addButton) {addButton.addEventListener('click', () => {
-    if ((!userInputField.value) || (userInputField.value.length < 3)){
-        alert('Fyll i en uppgift för att kunna lägga till den')
-    } else{
-        let element = document.createElement('button');
-        element.textContent = userInputField.value;
-        element.setAttribute('data-list', 'false')
-        displayUserList.appendChild(element);
-        userInputField.value = "";
-        makeTwoButtonsOnButton(element);
-}})};
+if (addButton) {addUserTaskToDisplay()};
 
-extraSida.addEventListener('click', () => {
-    const allDisplayButtons = getAllDisplayedTask();
-    for (let button of allDisplayButtons){
-        console.log(button.innerText);
-    }
-});
+
+
+
 
 
 

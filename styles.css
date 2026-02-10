@@ -565,6 +565,20 @@ section.links {
   display: none;
 }
 
+.finishTask {
+  border: 2px solid rgb(16, 75, 95);
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+.finishTask button {
+  border-radius: 2px;
+  border: 5px solid green;
+}
+.finishTask button .knappV, .finishTask button .knappX {
+  display: none;
+}
+
 .userList {
   border: 2px solid lightblue;
   padding: 10px;
