@@ -146,6 +146,10 @@ function doPreMadeChoicesFromList(array, parent){
 }
 }
 
+function cleanTaskText(text){
+    return text.replace('VX', '').trim();
+}
+
 function makeTwoButtonsOnButton(parentButton){
     let knappV = document.createElement('button');
     let knappX = document.createElement('button');
@@ -155,20 +159,32 @@ function makeTwoButtonsOnButton(parentButton){
     knappX.classList.add('knappX');
     knappV.addEventListener('click', (event) => {
         let parent = event.target.parentNode;
+        let taskText = parent.innerText;
+        let preMade = parent.dataset.list;
+         if (preMade === 'true'){
+            let indexSaveList = savePreMadeList.indexOf(cleanTaskText(taskText));
+            if (indexSaveList !== -1){savePreMadeList.splice(indexSaveList,1)};
+            let indexPreMade = preMadeCopiedArray.indexOf(cleanTaskText(taskText));
+            if (indexPreMade !== -1){preMadeCopiedArray.splice(indexPreMade, 1)};
+        }
         let moveItem = displayUserList.removeChild(parent);
         displayDoneTask.appendChild(moveItem);
-    });
+        finishTasksList.push(cleanTaskText(taskText));
+    })
     knappX.addEventListener('click', (event) => {
         let parent = event.target.parentNode;
         if (parent.dataset.list === 'true'){
             let moveItem = displayUserList.removeChild(parent);
             preMadeChoicesContainer.appendChild(moveItem);
             let taskText = moveItem.innerText;
-            let rensadText = taskText.replace('VX', '').trim();
-            let index = savePreMadeList.findIndex((e) => e === rensadText);
-            if (!index === -1) {savePreMadeList.splice(index, 1)};
-            preMadeCopiedArray.push(rensadText);
+            let index = savePreMadeList.indexOf(cleanTaskText(taskText));
+            if (index !== -1) {savePreMadeList.splice(index, 1)};
+            if (!preMadeCopiedArray.includes(cleanTaskText(taskText)))
+            {preMadeCopiedArray.push(cleanTaskText(taskText))};
         } else {
+            let taskText = parent.innerText;
+            let index = saveUserInputList.indexOf(cleanTaskText(taskText));
+            if (index !== -1){saveUserInputList.splice(index, 1)};
             displayUserList.removeChild(parent)}});
     parentButton.appendChild(knappV);
     parentButton.appendChild(knappX);
@@ -179,10 +195,9 @@ function moveTaskFromPremadeToDisplay (){
         let moveItem = preMadeChoicesContainer.removeChild(event.target);
         displayUserList.appendChild(moveItem);
         let taskText = event.target.innerText;
-        let rensadText =taskText.replace('VX', '').trim();
-        savePreMadeList.push(rensadText);
-        let index = preMadeCopiedArray.findIndex((e) => e === rensadText);
-        if (!index === -1) {preMadeCopiedArray.splice(index, 1)};
+        savePreMadeList.push(cleanTaskText(taskText));
+        let index = preMadeCopiedArray.indexOf(cleanTaskText(taskText));
+        if (index !== -1) {preMadeCopiedArray.splice(index, 1)};
         })
     }
 
@@ -203,6 +218,7 @@ function addUserTaskToDisplay(){
         else{
         let element = document.createElement('button');
         element.textContent = userInputField.value;
+        saveUserInputList.push(userInputField.value);
         element.setAttribute('data-list', 'false')
         displayUserList.appendChild(element);
         userInputField.value = "";
@@ -210,7 +226,9 @@ function addUserTaskToDisplay(){
 }})}
 
 //Visa datum och tid på alla sidor
-setInterval(() => displayDateAndTime(), 1000);
+document.addEventListener('DOMContentLoaded', () => {
+    displayDateAndTime();
+    setInterval(() => displayDateAndTime(), 1000);});
 
 //JavaScript för index.html
 const toggleNewsButton = document.getElementById('toggleNews');
@@ -329,13 +347,13 @@ if (rentFormLabel){
 //Extrasida med ToDo-lista
 const extraSida = document.getElementById('loadExtraPage');
 const preMadeChoicesArray = ['Putsa fönster (källare, vind, trappuppgång)','Gör rent carports', 'Rensa ogräs - häckar', 'Rensa ogräs - runt hus 27', 'Rensa ogräs - runt hus 29'];
-const preMadeCopiedArray = preMadeChoicesArray.slice();//justera preMade vid Load
+const preMadeCopiedArray = preMadeChoicesArray.slice();//justera preMadeTask vid Load
 const preMadeChoicesContainer = document.getElementById('preMadeChoicesContainer');
 const displayUserList = document.getElementById('displayUserList');
 const addButton = document.getElementById('displayUserChoiceInput');
 const userInputField = document.getElementById('userChoiceInputField');
 const userList = [];
-const savePreMadeList = []; //store elements from premade
+const savePreMadeList = []; //store chosen elements from premade between sessions
 const saveUserInputList = []; //store elements from userinput
 const finishTasksList = []; //store finish tasks between sessions
 const displayDoneTask = document.getElementById('displayDoneTaskContainer');
