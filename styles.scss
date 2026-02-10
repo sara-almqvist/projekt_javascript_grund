@@ -179,6 +179,7 @@ button {
     padding: 15px 10px;
     margin-left: 15px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border: 4px solid $bg-color2;
     border-radius: 20px;
     transition: all $transistion;
@@ -606,6 +607,10 @@ section.links {
     margin-bottom: 30px;
     padding: 10px;
 
+    div {
+        display: flex;
+    }
+
     button {
         border-radius: 2px;
         border: 5px solid green;
@@ -615,6 +620,20 @@ section.links {
         }
     }
 
+}
+
+#userChoiceInputField{
+    @include ord-text();
+    margin-left: 15px;
+}
+
+#reset {
+    background-color: black;
+    border: none;
+}
+
+#reset:hover {
+    border: 2px solid white;
 }
 
 .userList {

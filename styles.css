@@ -156,6 +156,7 @@ button {
   padding: 15px 10px;
   margin-left: 15px;
   margin-top: 10px;
+  margin-bottom: 10px;
   border: 4px solid rgb(16, 75, 95);
   border-radius: 20px;
   transition: all 200ms ease-in-out;
@@ -571,12 +572,32 @@ section.links {
   margin-bottom: 30px;
   padding: 10px;
 }
+.finishTask div {
+  display: flex;
+}
 .finishTask button {
   border-radius: 2px;
   border: 5px solid green;
 }
 .finishTask button .knappV, .finishTask button .knappX {
   display: none;
+}
+
+#userChoiceInputField {
+  color: black;
+  font-size: 16px;
+  font-family: Tahoma, serif;
+  letter-spacing: 1px;
+  margin-left: 15px;
+}
+
+#reset {
+  background-color: black;
+  border: none;
+}
+
+#reset:hover {
+  border: 2px solid white;
 }
 
 .userList {

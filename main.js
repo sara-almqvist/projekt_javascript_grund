@@ -166,6 +166,9 @@ function makeTwoButtonsOnButton(parentButton){
             if (indexSaveList !== -1){savePreMadeList.splice(indexSaveList,1)};
             let indexPreMade = preMadeCopiedArray.indexOf(cleanTaskText(taskText));
             if (indexPreMade !== -1){preMadeCopiedArray.splice(indexPreMade, 1)};
+        } else{
+            let indexUserList = saveUserInputList.indexOf(cleanTaskText(taskText));
+            if (indexUserList !== -1){saveUserInputList.splice(indexUserList,1)};
         }
         let moveItem = displayUserList.removeChild(parent);
         displayDoneTask.appendChild(moveItem);
@@ -211,6 +214,54 @@ function loadTasks(nyckel){
         return JSON.parse(variabel);
     }}
 
+function saveUserInfo() {
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden'){
+        saveTasks('savePreMadeList', savePreMadeList);
+        saveTasks('preMadeCopiedArray', preMadeCopiedArray);
+        saveTasks('finishTasksList', finishTasksList);
+        saveTasks('saveUserInputList', saveUserInputList);
+    }});
+}
+
+function loadUserInfo(){
+    let loadedPreMadeCopiedArray = loadTasks('preMadeCopiedArray');
+    let loadedSavePreMadeList = loadTasks('savePreMadeList');
+    let loadedSaveUserInputList = loadTasks('saveUserInputList');
+    let loadedFinishTasksList = loadTasks('finishTasksList');
+
+    if (loadedPreMadeCopiedArray){
+        doPreMadeChoicesFromList(loadedPreMadeCopiedArray, preMadeChoicesContainer);
+    } else {
+        doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
+    }
+    
+    if (loadedFinishTasksList){
+        for (let task of loadedFinishTasksList){
+            let item = document.createElement('button');
+            item.textContent = task;
+            displayDoneTask.appendChild(item);
+        }}
+    
+    if (loadedSavePreMadeList){
+        for (let task of loadedSavePreMadeList){
+            let item = document.createElement('button');
+            item.textContent = task;
+            item.setAttribute('data-list', 'true');
+            displayUserList.appendChild(item);
+            makeTwoButtonsOnButton(item);
+        }}
+
+    if (loadedSaveUserInputList){
+        for (let task of loadedSaveUserInputList){
+            let item = document.createElement('button');
+            item.textContent = task;
+            item.setAttribute('data-list', 'false');
+            displayUserList.appendChild(item);
+            makeTwoButtonsOnButton(item);
+        }}
+}
+
 function addUserTaskToDisplay(){
     addButton.addEventListener('click', () => {
     if ((!userInputField.value) || (userInputField.value.length < 3)){
@@ -224,6 +275,23 @@ function addUserTaskToDisplay(){
         userInputField.value = "";
         makeTwoButtonsOnButton(element);
 }})}
+
+function resetTasks (containerclass){
+    let searchword= 'div.'+containerclass+' > button';
+    const buttonList = document.querySelectorAll(searchword);
+    for (let button of buttonList){
+        let parent = document.querySelector(('div.'+containerclass));
+        parent.removeChild(button);
+    };
+}
+
+function resetButton () {
+    localStorage.clear();
+    resetTasks("preMade");
+    doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
+    resetTasks('userList');
+    resetTasks("finishTask");
+}
 
 //Visa datum och tid på alla sidor
 document.addEventListener('DOMContentLoaded', () => {
@@ -352,18 +420,23 @@ const preMadeChoicesContainer = document.getElementById('preMadeChoicesContainer
 const displayUserList = document.getElementById('displayUserList');
 const addButton = document.getElementById('displayUserChoiceInput');
 const userInputField = document.getElementById('userChoiceInputField');
-const userList = [];
+const displayDoneTask = document.getElementById('displayDoneTaskContainer');
+const resetBtn = document.getElementById('reset');
 const savePreMadeList = []; //store chosen elements from premade between sessions
 const saveUserInputList = []; //store elements from userinput
 const finishTasksList = []; //store finish tasks between sessions
-const displayDoneTask = document.getElementById('displayDoneTaskContainer');
 
 if (extraSida){
-    doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
+    loadUserInfo();
+    //doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
     moveTaskFromPremadeToDisplay();
+    saveUserInfo();
 };
 
 if (addButton) {addUserTaskToDisplay()};
+
+if (resetBtn){resetBtn.addEventListener('click', () => resetButton())};
+
 
 
 
