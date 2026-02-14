@@ -45,7 +45,7 @@
                     <form id="formReport" class="contactform" >
                         <label for formReportUsername id="formReportUsernameLabel" data-content="Namn">Namn </label>
                         <input type="text" data-focus="Fyll i för- och efternamn" data-invalid="Du måste fylla i för- och efternamn" id="formReportUsername" size="30">
-                        <label for formReportLocation id="formReportUserInputLocation" data-="Var finns felet">Var finns felet </label>
+                        <label for formReportLocation id="formReportUserInputLocation" data-content="Var finns felet">Var finns felet </label>
                         <input type="text" data-focus="Ange berörd lägenhet eller gemensamt utrymme" data-invalid="Du måste fylla i var felet finns" id="formReportLocation" size="30">
                         <label for formReportMessage id="formReportUserInputMessage" data-content="Beskriv felet">Beskriv felet</label>
                         <textarea data-focus="Beskriv felet/ärendet" data-invalid="Du måste beskriva felet med flera ord" cols="30" rows="5" id="formReportMessage" required></textarea>
@@ -93,17 +93,16 @@
             </section>
 
             <section class="contactform" id="contactformContainer">
-                <h2 class="rubrik" id="kontakt">Kontakta styrelsen</h2>
+                <h2 class="rubrik" id="kontakt" autofocus="true">Kontakta styrelsen</h2>
                 <form action="mailto:brfsodralugnet@gmail.com" method="post" enctype="text/plain" id="contactform">
                     <label for="contactname" id="contactnameLabel" data-content="Ditt namn">Ditt namn:</label><br>
-                    <input type="text" id="contactname" name="contactname" size="30" required minlength="2" data-invalid="Du måste ange för- och efternamn" data-focus="Fyll i ditt för- och efternamn"><br>
-                    <p id="invalidName" class="doldTabell"></p>
+                    <input type="text" id="contactname" name="contactname" size="30" required minlength="4" data-invalid="Du måste ange för- och efternamn" data-focus="Fyll i ditt för- och efternamn"><br>
+                    <p id="contactNameError" class="error"></p>
                     <label for="email" id="emailLabel" data-content="Din e-postadress">Din e-postadress:</label><br>
                     <input type="email" id="email" name="email" size="30" data-invalid="Ange en giltig e-postadress" data-focus="Fyll i din e-postadress"><br>
-                    <p id="invalidEmail" class="doldTabell"></p>
+                    <p id="userEmailError" class="error"></p>
                     <label for="message" id="messageLabel" data-content="Meddelande till styrelsen">Meddelande till styrelsen:</label><br>
-                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" cols="30" rows="5" required data-invalid="Fyll i meddelandet" data-focus="Skriv ditt meddelande"></textarea><br>
-                    <p id="invalidMessage" class="doldTabell"></p>
+                    <textarea id="message" name="message" placeholder="Skriv ditt meddelande här" cols="30" rows="5" required data-invalid="Fyll i meddelandet med mer än 10 bokstäver" data-focus="Skriv ditt meddelande" minlength="10"></textarea><br>
                     <input type="submit">
                     <input type="reset">
                 </form>

@@ -56,8 +56,7 @@ function doToggleNewsCards(){
             case 0: createMultipleNewsCards(newsList);
             toggleNewsLabel.innerText = 'Visar alla nyheter';
             break;
-            default:
-            createMultipleNewsCards(threeNewsList);
+            default:createMultipleNewsCards(threeNewsList);
             break;
        }
        break;
@@ -77,7 +76,7 @@ function updateDisplayedImage(img){
 }
 
 function createImageGallery(){
-    for (bild of bildGalleriObjekt){
+    for (bild of bildGalleriObjekt){//Det är en lista med bildobjekt
      let img = document.createElement('img');
      img.setAttribute('src', bild.filename);
      img.setAttribute('alt', bild.alt);
@@ -233,27 +232,40 @@ function saveUserInfo() {
     }});
 }
 
+function checkListFromLocalStorage(load, array){
+    if(load.length > 0){
+        for (let l of load){
+            if (!array.includes(l)){array.push(l);}
+        }
+    }
+}
+
 function loadUserInfo(){
     let loadedPreMadeCopiedArray = loadTasks('preMadeCopiedArray');
     let loadedSavePreMadeList = loadTasks('savePreMadeList');
     let loadedSaveUserInputList = loadTasks('saveUserInputList');
     let loadedFinishTasksList = loadTasks('finishTasksList');
 
-    if (loadedPreMadeCopiedArray){
-        doPreMadeChoicesFromList(loadedPreMadeCopiedArray, preMadeChoicesContainer);
+    checkListFromLocalStorage(loadedPreMadeCopiedArray, preMadeCopiedArray);
+    checkListFromLocalStorage(loadedFinishTasksList, finishTasksList);
+    checkListFromLocalStorage(loadedSavePreMadeList, savePreMadeList);
+    checkListFromLocalStorage(loadedSaveUserInputList, saveUserInputList);
+
+    if (loadedPreMadeCopiedArray.length > 0){
+        doPreMadeChoicesFromList(preMadeCopiedArray, preMadeChoicesContainer);
     } else {
         doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
     }
-    
-    if (loadedFinishTasksList){
-        for (let task of loadedFinishTasksList){
+
+    if (finishTasksList.length > 0){
+        for (let task of finishTasksList){
             let item = document.createElement('button');
             item.textContent = task;
             displayDoneTask.appendChild(item);
         }}
     
-    if (loadedSavePreMadeList){
-        for (let task of loadedSavePreMadeList){
+    if (savePreMadeList.length > 0){
+        for (let task of savePreMadeList){
             let item = document.createElement('button');
             item.textContent = task;
             item.setAttribute('data-list', 'true');
@@ -261,15 +273,18 @@ function loadUserInfo(){
             makeTwoButtonsOnButton(item);
         }}
 
-    if (loadedSaveUserInputList){
-        for (let task of loadedSaveUserInputList){
+    if (saveUserInputList.length > 0){
+        for (let task of saveUserInputList){
             let item = document.createElement('button');
             item.textContent = task;
             item.setAttribute('data-list', 'false');
             displayUserList.appendChild(item);
             makeTwoButtonsOnButton(item);
-        }}
-}
+        }}   
+    
+    if(preMadeCopiedArray.length === 0){preMadeChoicesArray.forEach((i) =>{
+        preMadeCopiedArray.push(i);})
+}}
 
 function addUserTaskToDisplayWithButton(){
     addButton.addEventListener('click', () => {
@@ -316,6 +331,13 @@ function resetButton () {
     doPreMadeChoicesFromList(preMadeChoicesArray, preMadeChoicesContainer);
     resetTasks('userList');
     resetTasks("finishTask");
+    while (finishTasksList.length > 0){finishTasksList.pop();}
+    while (savePreMadeList.length > 0){savePreMadeList.pop();}
+    while (saveUserInputList.length > 0){saveUserInputList.pop();}
+    while (preMadeCopiedArray.length > 0){preMadeCopiedArray.pop();}
+    preMadeChoicesArray.forEach((i) =>{
+        preMadeCopiedArray.push(i);})
+    saveTasks('preMadeCopiedArray', preMadeCopiedArray);
 }
 
 //Visa datum och tid på alla sidor
@@ -392,23 +414,50 @@ const contactName = document.getElementById('contactname');
 const userEmail = document.getElementById('email');
 const userMessage = document.getElementById('message');
 const contactNameLabel = document.getElementById('contactnameLabel');
+const contactNameError = document.getElementById('contactNameError');
+const userEmailError = document.getElementById('userEmailError');
+
 
 if (contactForm){
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        let checkMessage = userMessage.value.trim();
+        let countWords = checkMessage.split(" ").length;
+        if(countWords < 2){
+         document.getElementById('messageLabel').innerText = "Ange mer än ett ord";
+         return;   
+        }
         makeResponseSubmitForm(contactName, 'contactformContainer', "tack för ditt meddelande. Styrelsen återkopplar så snart vi kan.", userEmail, userMessage);
-    })
-    contactForm.addEventListener('reset', (e) => {
-        e.preventDefault();
-        contactName.value = "";
-        userEmail.value = "";
-        userMessage.value = "";
     })
 };
 
-if(contactName){validateUserInputLength(contactName, contactNameLabel, 3)};
-if(userEmail){validateUserInputLength(userEmail, document.getElementById('emailLabel'), 3)};
-if(userMessage){validateUserInputLength(userMessage, document.getElementById('messageLabel'), 10)};
+if(contactName){
+    validateUserInputLength(contactName, contactNameLabel, 3);
+    contactName.addEventListener('input', () => {
+        if (contactName.value.length < 4){
+            contactNameError.innerText = "Namnet måste innehålla minst 4 bokstäver";
+            return
+        }
+        if (!contactName.value.includes(" ")) {
+            contactNameError.innerText = "Separera för- och efternamn med mellanslag";
+            return
+        }
+        contactNameError.innerText = "";
+    })};
+
+if(userEmail){
+    validateUserInputLength(userEmail, document.getElementById('emailLabel'), 3);
+    userEmail.addEventListener('input', () => {
+        if ((!userEmail.value.includes('@')) || (!userEmail.value.includes('.'))){
+            userEmailError.textContent = "En giltig e-postadress innehåller @ och .";
+            return;
+        }
+        userEmailError.textContent = "";
+    })};
+
+if(userMessage){
+    validateUserInputLength(userMessage, document.getElementById('messageLabel'), 10);
+};
 
 //Formulärsektionen
 //Ingen mottagande backend som tar emot formulärdatan ännu
@@ -452,8 +501,8 @@ if (rentFormLabel){
 
 //Extrasida med ToDo-lista
 const extraSida = document.getElementById('loadExtraPage');
-const preMadeChoicesArray = ['Putsa fönster (källare, vind, trappuppgång)','Gör rent carports', 'Rensa ogräs - häckar', 'Rensa ogräs - runt hus 27', 'Rensa ogräs - runt hus 29'];
-const preMadeCopiedArray = preMadeChoicesArray.slice();//justera preMadeTask vid Load
+const preMadeChoicesArray = ['Putsa fönster (källare, vind, trappuppgång)','Gör rent carports', 'Rensa ogräs - häckar', 'Rensa ogräs - runt hus 27', 'Rensa ogräs - runt hus 29'];//Tanken är att denna lista hämtas från backend-del senare
+const preMadeCopiedArray = [];//justera preMadeTask när det finns sparade värden
 const preMadeChoicesContainer = document.getElementById('preMadeChoicesContainer');
 const displayUserList = document.getElementById('displayUserList');
 const addButton = document.getElementById('displayUserChoiceInput');
@@ -468,7 +517,7 @@ if (extraSida){
     loadUserInfo();
     moveTaskFromPremadeToDisplay();
     saveUserInfo();
-};
+    };
 
 if (addButton) {addUserTaskToDisplayWithButton()}
 
@@ -487,5 +536,4 @@ if(userInputField) {
     })
 };
 
-if (resetBtn){resetBtn.addEventListener('click', () => resetButton())};
-    
+if (resetBtn){resetBtn.addEventListener('click', () => resetButton())}

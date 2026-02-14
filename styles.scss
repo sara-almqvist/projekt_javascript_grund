@@ -486,7 +486,6 @@ li label:hover {
         margin: 10px;
     }
 
-
     input[type=submit],
     input[type=reset] {
         @include ord-text();
@@ -510,6 +509,14 @@ li label:hover {
         @include b1-c1();
     }
 
+}
+
+.error {
+    @include ord-text();
+    color: red;
+    font-style: italic;
+    margin-top: 0;
+    
 }
 
 .modalDialog {
